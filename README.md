@@ -11,7 +11,7 @@
 
 **知行合一**
 
-[![](https://img.shields.io/badge/ant design-blazor-blue)](https://github.com/ant-design-blazor/ant-design-pro-blazor) &ensp; [![](https://img.shields.io/badge/license-MIT-3963bc.svg)](LICENSE)
+[![](https://img.shields.io/badge/antdesign-blazor-blue)](https://github.com/ant-design-blazor/ant-design-pro-blazor) &ensp; [![](https://img.shields.io/badge/license-MIT-3963bc.svg)](LICENSE)
 
 &nbsp;
 
