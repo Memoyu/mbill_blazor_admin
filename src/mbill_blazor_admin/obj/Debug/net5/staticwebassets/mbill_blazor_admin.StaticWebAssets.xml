@@ -1,0 +1,6 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="D:\个人记账\blazor_admin\src\mbill_blazor_admin\bin\Debug\net5\wwwroot\" />
+  <ContentRoot BasePath="_content/AntDesign" Path="C:\Users\Memoyu\.nuget\packages\antdesign\0.6.0-nightly-2101140256\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/AntDesign.Charts" Path="C:\Users\Memoyu\.nuget\packages\antdesign.charts\0.2.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/AntDesign.Pro.Layout" Path="C:\Users\Memoyu\.nuget\packages\antdesign.pro.layout\0.1.0-nightly-210113091622\build\..\staticwebassets\" />
+</StaticWebAssets>
