@@ -341,3 +341,4 @@ healthchecksdb
 
 !.template/*.nupkg
 !Memoyu.Core.WebApi.Template.*.nupkg
+src/mbill_blazor_admin/.vs/mbill_blazor_admin/v16/.suo
