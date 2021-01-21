@@ -1,9 +1,8 @@
 ﻿@namespace mbill_blazor_admin
 @inherits LayoutComponentBase
 
-<AntDesign.Pro.Layout.BasicLayout 
-    Logo="@("https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg")"
-    MenuData="_menuData">
+<AntDesign.Pro.Layout.BasicLayout Logo="@("./pro_icon.svg")"
+                                  MenuData="_menuData">
     <RightContentRender>
         <RightContent />
     </RightContentRender>
@@ -11,18 +10,84 @@
         @Body
     </ChildContent>
 </AntDesign.Pro.Layout.BasicLayout>
-<SettingDrawer />
-
+<link type="text/css" rel="stylesheet" id="theme-style" href="/_content/AntDesign.Pro.Layout/theme/purple.css" />
 @code
 {
-    private readonly MenuDataItem[] _menuData = 
+    private readonly MenuDataItem[] _menuData =
     {
         new MenuDataItem
         {
             Path = "/",
-            Name = "welcome",
-            Key = "welcome",
+            Name = "首页",
+            Key = "dashboard",
             Icon = "smile",
-        }
+        },
+        new MenuDataItem
+        {
+            Name = "系统管理",
+            Key = "system",
+            Icon = "setting",
+            Children = new MenuDataItem[]
+            {
+                new MenuDataItem
+                {
+                    Path = "/system/user",
+                    Name = "用户管理",
+                    Key = "system_user",
+                    Icon = "user",
+                },
+                new MenuDataItem
+                {
+                    Path = "/system/role",
+                    Name = "角色管理",
+                    Key = "system_role",
+                    Icon = "team",
+                },
+                new MenuDataItem
+                {
+                    Path = "/system/permission",
+                    Name = "权限管理",
+                    Key = "system_permission",
+                    Icon = "safety",
+                },
+                new MenuDataItem
+                {
+                    Path = "/system/log",
+                    Name = "日志管理",
+                    Key = "system_log",
+                    Icon = "profile",
+                }
+            }
+        },
+        new MenuDataItem
+        {
+            Name = "基础数据",
+            Key = "dashboard",
+            Icon = "database",
+            Children = new MenuDataItem[]
+            {
+                new MenuDataItem
+                {
+                    Path = "/basedata/dictionary",
+                    Name = "字典管理",
+                    Key = "basedata_dictionary",
+                    Icon = "book",
+                },
+                new MenuDataItem
+                {
+                    Path = "/basedata/category",
+                    Name = "分类管理",
+                    Key = "basedata_category",
+                    Icon = "container",
+                },
+                new MenuDataItem
+                {
+                    Path = "/basedata/asset",
+                    Name = "资产管理",
+                    Key = "basedata_asset",
+                    Icon = "red-envelope",
+                }
+            }
+        },
     };
 }
