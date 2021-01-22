@@ -338,7 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-
-!.template/*.nupkg
-!Memoyu.Core.WebApi.Template.*.nupkg
-src/mbill_blazor_admin/.vs/mbill_blazor_admin/v16/.suo
+/package-lock.json
+/src/AntDesign.Pro/wwwroot/css/site.css
