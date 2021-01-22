@@ -1,8 +1,10 @@
 ﻿@namespace mbill_blazor_admin
 @inherits LayoutComponentBase
 
-<AntDesign.Pro.Layout.BasicLayout Logo="@("./pro_icon.svg")"
-                                  MenuData="_menuData">
+<AntDesign.Pro.Layout.BasicLayout 
+    Logo="@("./pro_icon.svg")"
+    MenuData="_menuData"
+    FooterRender=_footerView >
     <RightContentRender>
         <RightContent />
     </RightContentRender>
@@ -13,6 +15,7 @@
 <link type="text/css" rel="stylesheet" id="theme-style" href="/_content/AntDesign.Pro.Layout/theme/purple.css" />
 @code
 {
+    private RenderFragment _footerView = @<mbill_blazor_admin.Components.FooterView />;
     private readonly MenuDataItem[] _menuData =
     {
         new MenuDataItem

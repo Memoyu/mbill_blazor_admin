@@ -1,0 +1,61 @@
+﻿@inherits AntDomComponentBase
+
+<footer class="mbill-global-footer" id="@Id">
+
+    <div class="mbill-global-footer-links">
+        @foreach (var link in Links)
+        {
+            <a key="@link.Key"  style="@(link.Href == null ? "":"&:hover {color: @primary-color;}" )"
+               title="@link.Key"
+               target=@(link.BlankTarget ? "_blank" : "_self" )
+               href=@link.Href>
+                @if (link.Title.IsT0)
+                {
+                    @link.Title.AsT0
+                }
+                else
+                {
+                    @link.Title.AsT1
+                }
+            </a>
+        }
+    </div>
+    <div class="mbill-global-footer-copyright">
+        Copyright <Icon Type="copyright" /> @Copyright
+    </div>
+</footer>
+
+
+
+@code {
+    public string Copyright { get; set; } = "2021 Memoyu";
+
+    public LinkItem[] Links { get; set; } =
+    {
+         new LinkItem
+        {
+            Key = "Power",
+            Title = "Power By",
+        },
+        new LinkItem
+        {
+            Key = ".NET 5",
+            Title = ".NET 5",
+            Href = "https://pro.ant.design",
+            BlankTarget = true,
+        },
+        new LinkItem
+        {
+            Key = "and",
+            Title = (RenderFragment)(@<Icon Type="heart" />),
+        },
+        new LinkItem
+        {
+            Key = "Ant Design Pro",
+            Title = "Ant Design Pro Blazor",
+            Href = "https://pro.ant.design",
+            BlankTarget = true,
+        }
+    };
+
+}

@@ -15,6 +15,11 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Bill\" />
+    <Folder Include="Pages\Core\" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(SolutionDir)'==''">
     <SolutionDir>./</SolutionDir>
   </PropertyGroup>

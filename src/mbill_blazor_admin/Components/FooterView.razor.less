@@ -1,0 +1,26 @@
+﻿@import '~antd/es/style/themes/default.less';
+
+.mbill-global-footer {
+    margin: 48px 0 24px 0;
+    padding: 0 16px;
+    text-align: center;
+
+    &-links {
+        a {
+            color: @text-color-secondary;
+            transition: all 0.3s;
+
+            &:not(:last-child) {
+                margin-right: 15px;
+            }
+            /*&:hover {
+                color: @primary-color;
+            }*/
+        }
+    }
+
+    &-copyright {
+        color: @text-color-secondary;
+        font-size: @font-size-base;
+    }
+}
