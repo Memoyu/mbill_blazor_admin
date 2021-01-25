@@ -27,7 +27,9 @@
 
 ✨[采用.NET5实现的后端服务 - Memoyu/mbill_service](https://github.com/Memoyu/mbill_service)
 
-✨[采用Wepy实现的小程序前端 - Memoyu/mbill_app](https://github.com/Memoyu/mbill_app)
+✨[采用Wepy实现的小程序前端 - Memoyu/mbill_wechat_app](https://github.com/Memoyu/mbill_wechat_app)
+
+✨[采用Xamarin搭建移动客户端App-Memoyu/mbill_xamarin_app](https://github.com/Memoyu/mbill_xamarin_app)
 
 &nbsp;
 
