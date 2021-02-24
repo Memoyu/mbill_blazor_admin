@@ -1,0 +1,68 @@
+[
+  {
+    "path": "/",
+    "name": "首页",
+    "key": "dashboard",
+    "icon": "smile"
+  },
+  {
+    "path": "/core",
+    "name": "系统管理",
+    "key": "core",
+    "icon": "setting",
+    "children": [
+      {
+        "path": "/core/user",
+        "name": "用户管理",
+        "key": "core_user",
+        "icon": "user"
+      },
+      {
+        "path": "/core/role",
+        "name": "角色管理",
+        "key": "core_role",
+        "icon": "team"
+      },
+
+      {
+        "path": "/core/permission",
+        "name": "权限管理",
+        "key": "core_permission",
+        "icon": "safety"
+      },
+
+      {
+        "path": "/core/log",
+        "name": "日志管理",
+        "key": "core_log",
+        "icon": "profile"
+      }
+    ]
+  },
+  {
+    "path": "/basedata",
+    "name": "基础数据",
+    "key": "basedata",
+    "icon": "database",
+    "children": [
+      {
+        "path": "/basedata/dictionary",
+        "name": "字典管理",
+        "key": "basedata_dictionary",
+        "icon": "book"
+      },
+      {
+        "path": "/basedata/category",
+        "name": "分类管理",
+        "key": "basedata_category",
+        "icon": "container"
+      },
+      {
+        "path": "/basedata/asset",
+        "name": "资产管理",
+        "key": "basedata_asset",
+        "icon": "red-envelope"
+      }
+    ]
+  }
+]

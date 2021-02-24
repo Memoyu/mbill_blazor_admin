@@ -1,0 +1,58 @@
+﻿@using mbill_blazor_admin.Models.Core
+@namespace mbill_blazor_admin.Pages.Core.User
+@page "/core/user"
+
+<PageContainer Title="用户管理">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>主页</BreadcrumbItem>
+            <BreadcrumbItem>系统管理</BreadcrumbItem>
+            <BreadcrumbItem>用户管理</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+
+    <ChildContent>
+        <Card>
+            <Table @ref="table"
+                   TItem="UserModle"
+                   DataSource="@_users"
+                   Total="_total"
+                   OnChange="@onChange"
+                   @bind-PageIndex="_pageIndex"
+                   @bind-PageSize="_pageSize"
+                   @bind-SelectedRows="_selectedRows">
+                <Selection Key="@(context.Id.ToString())" />
+                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="昵称" @bind-Field="@context.Nickname" Sortable />
+                <AntDesign.Column Title="用户姓名" @bind-Field="@context.Username" Sortable />
+                <AntDesign.Column Title="性别" @bind-Field="@context.Gender" Sortable />
+                <AntDesign.Column Title="邮箱" @bind-Field="@context.Email" Sortable />
+                <AntDesign.Column Title="电话" @bind-Field="@context.Phone" Sortable />
+                <AntDesign.Column Title="地址" @bind-Field="@context.Address" Sortable />
+                <AntDesign.Column Title="启用状态" Field="@context.IsEnable">
+                    <Switch @bind-Value="@context.IsEnable"></Switch>
+                </AntDesign.Column>
+                <ActionColumn>
+                    <Space>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
+                    </Space>
+                    <Space>
+                        <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                    </Space>
+                </ActionColumn>
+            </Table>
+            <br />
+            <h5>已选:</h5>
+            @if (_selectedRows != null && _selectedRows.Any())
+            {
+                <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+
+                @foreach (var selected in _selectedRows)
+                {
+                    <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
+                }
+            }
+        </Card>
+    </ChildContent>
+</PageContainer>
+
