@@ -21,7 +21,7 @@
                    @bind-PageIndex="_pageIndex"
                    @bind-PageSize="_pageSize"
                    @bind-SelectedRows="_selectedRows">
-                <Selection Key="@(context.Id.ToString())" />
+                @*<Selection Key="@(context.Id.ToString())" />*@
                 <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
                 <AntDesign.Column Title="昵称" @bind-Field="@context.Nickname" Sortable />
                 <AntDesign.Column Title="用户姓名" @bind-Field="@context.Username" Sortable />
@@ -32,7 +32,7 @@
                 <AntDesign.Column Title="启用状态" Field="@context.IsEnable">
                     <Switch @bind-Value="@context.IsEnable"></Switch>
                 </AntDesign.Column>
-                <ActionColumn>
+                <ActionColumn Title="操作">
                     <Space>
                         <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
                     </Space>
@@ -41,7 +41,7 @@
                     </Space>
                 </ActionColumn>
             </Table>
-            <br />
+            @*<br />
             <h5>已选:</h5>
             @if (_selectedRows != null && _selectedRows.Any())
             {
@@ -51,7 +51,7 @@
                 {
                     <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
                 }
-            }
+            }*@
         </Card>
     </ChildContent>
 </PageContainer>
