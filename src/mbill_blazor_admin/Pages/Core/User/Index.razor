@@ -22,13 +22,19 @@
                    @bind-PageSize="_pageSize"
                    @bind-SelectedRows="_selectedRows">
                 @*<Selection Key="@(context.Id.ToString())" />*@
-                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
-                <AntDesign.Column Title="昵称" @bind-Field="@context.Nickname" Sortable />
-                <AntDesign.Column Title="用户姓名" @bind-Field="@context.Username" Sortable />
-                <AntDesign.Column Title="性别" @bind-Field="@context.Gender" Sortable />
-                <AntDesign.Column Title="邮箱" @bind-Field="@context.Email" Sortable />
-                <AntDesign.Column Title="电话" @bind-Field="@context.Phone" Sortable />
-                <AntDesign.Column Title="地址" @bind-Field="@context.Address" Sortable />
+                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable/>
+                <AntDesign.Column Title="昵称" @bind-Field="@context.Nickname" />
+                <AntDesign.Column Title="用户姓名" @bind-Field="@context.Username" />
+                <AntDesign.Column Title="性别" @bind-Field="@context.Gender" />
+                <AntDesign.Column Title="邮箱" @bind-Field="@context.Email" />
+                <AntDesign.Column Title="电话" @bind-Field="@context.Phone" />
+                <AntDesign.Column Title="地址" @bind-Field="@context.Address" />
+                <AntDesign.Column Title="角色" @bind-Field="@context.Roles">
+                    @foreach (var role in context.Roles)
+                    {
+                        <Tag Color="blue">@role.Name</Tag>
+                    }
+                </AntDesign.Column>
                 <AntDesign.Column Title="启用状态" Field="@context.IsEnable">
                     <Switch @bind-Value="@context.IsEnable"></Switch>
                 </AntDesign.Column>

@@ -22,6 +22,19 @@ namespace mbill_blazor_admin.Pages.Core.User
                 Email = "mmy6076@outlook.com",
                 Phone = "1887861343",
                 Address="白云区",
+                Roles = new List<RoleModel>
+                {
+                    new RoleModel
+                    {
+                        Id=3,
+                        Name="User"
+                    },
+                    new RoleModel
+                    {
+                        Id=1,
+                        Name="Admin"
+                    }
+                },
                 IsEnable= true
             },
             new UserModle
@@ -33,6 +46,14 @@ namespace mbill_blazor_admin.Pages.Core.User
                 Email = "mmy0925@outlook.com",
                 Phone = "1887861343",
                 Address="白云区",
+                Roles = new List<RoleModel>
+                {
+                    new RoleModel
+                    {
+                        Id=2,
+                        Name="Admin"
+                    }
+                },
                 IsEnable= true
             },
             new UserModle
@@ -44,6 +65,14 @@ namespace mbill_blazor_admin.Pages.Core.User
                 Email = "mmy6076@outlook.com",
                 Phone = "1887861343",
                 Address="白云区",
+                Roles = new List<RoleModel>
+                {
+                    new RoleModel
+                    {
+                        Id=1,
+                        Name="Administrator"
+                    }
+                },
                 IsEnable= true
             }
         };
