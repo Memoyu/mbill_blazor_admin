@@ -1,3 +1,4 @@
-*.js linguist-language=C#
-*.css linguist-language=C#
-*.HTML linguist-language=C#
+*.js linguist-language=c#
+*.css linguist-language=c#
+*.html linguist-language=c#
+*.less linguist-language=c#
