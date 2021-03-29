@@ -1,0 +1,26 @@
+﻿@layout CustomUserLayout
+@page "/account/login"
+
+
+<div class="main__b__0">
+    <div class="login">
+        <Card Class="login-pre">
+            <Form Model="@_loginModel" OnFinish="HandleSubmit">
+                <ChildContent>
+                    <FormItem>
+                        <AntDesign.Input Placeholder="用户名" Size="large" @bind-Value="@context.UserName">
+                            <Prefix><Icon Type="user" /></Prefix>
+                        </AntDesign.Input>
+                    </FormItem>
+                    <FormItem>
+                        <AntDesign.Input Placeholder="密码" Size="large" @bind-Value="@context.Password" Type="password">
+                            <Prefix><Icon Type="lock" /></Prefix>
+                        </AntDesign.Input>
+                    </FormItem>
+                </ChildContent>
+            </Form>
+            <Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>登  陆 </Button>
+        </Card>
+    </div>
+</div>
+
