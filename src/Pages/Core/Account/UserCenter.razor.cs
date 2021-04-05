@@ -16,8 +16,8 @@ namespace mbill_blazor_admin.Pages.Core.Account
         [Inject] protected ICoreService coreService { get; set; }
         protected override async Task OnInitializedAsync()
         {
+            await base.OnInitializedAsync();
             _currentUser = await coreService.GetUserInfoByToken();
-            Console.WriteLine(JsonConvert.SerializeObject(_currentUser));
         }
     }
 }

@@ -15,7 +15,7 @@ using System;
 
 namespace mbill_blazor_admin.Components
 {
-    public partial class RightContent : AntDomComponentBase
+    public partial class RightContent 
     {
         private UserModel _currentUser = new UserModel
         {
@@ -27,25 +27,23 @@ namespace mbill_blazor_admin.Components
         private int _count = 0;
 
         [Inject] protected NavigationManager NavigationManager { get; set; }
-
-        //[Inject] protected IUserService UserService { get; set; }
-        //[Inject] protected IProjectService ProjectService { get; set; }
         [Inject] protected MessageService MessageService { get; set; }
         [Inject] protected AuthenticationStateProvider authenticationService { get; set; }
+        [Inject] protected IJSRuntime _jsRuntime { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
+            var user = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", localStorageConst.UserInfo);
+            Console.WriteLine("json" + user);
+            //if (!string.IsNullOrWhiteSpace(user))
+                _currentUser = JsonConvert.DeserializeObject<UserModel>(user);
+            Console.WriteLine("json2" + _currentUser.Address);
+
             await base.OnInitializedAsync();
             SetClassMap();
-            var user = await Js.InvokeAsync<string>("localStorage.getItem", localStorageConst.UserInfo);
-            if (!string.IsNullOrWhiteSpace(user))
-                _currentUser = JsonConvert.DeserializeObject<UserModel>(user);
-            //var notices = await ProjectService.GetNoticesAsync();
-            //_notifications = notices.Where(x => x.Type == "notification").Cast<NoticeIconData>().ToArray();
-            //_messages = notices.Where(x => x.Type == "message").Cast<NoticeIconData>().ToArray();
-            //_events = notices.Where(x => x.Type == "event").Cast<NoticeIconData>().ToArray();
-            //_count = notices.Length;
         }
+
+        
 
         protected void SetClassMap()
         {

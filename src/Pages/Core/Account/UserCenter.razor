@@ -1,12 +1,14 @@
 ﻿@page "/account/center"
 
 <GridContent Class="card-content">
-    <Card Style="width:500px; margin-bottom: 24px;" >
+    <Card Style="width:500px; margin-bottom: 24px;">
         <div class="avatarHolder">
             <img alt="" src="@_currentUser.AvatarUrl" />
             <div className="name">@_currentUser.Username</div>
             <div>@_currentUser.Nickname</div>
         </div>
+
+        <Divider Dashed />
 
         <div class="detail">
             <p>
@@ -30,15 +32,10 @@
             <div class="tagsTitle">角色</div>
             @foreach (var role in _currentUser.Roles)
             {
-                <Tag Color="blue">@role.Name</Tag>
+                <Tag Color="blue">@role.Info</Tag>
             }
         </div>
 
         <Divider Dashed Style="margin-top: 16px;" />
-
-        <div class="team">
-            <div class="teamTitle">Team</div>
-            <!--todo: add notice-->
-        </div>
     </Card>
 </GridContent>

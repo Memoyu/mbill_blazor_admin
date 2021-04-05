@@ -68,6 +68,6 @@ namespace mbill_blazor_admin.Models.Core
         /// </summary>
         public bool IsEnable { get; set; } = true;
 
-        public List<RoleModel> Roles { get; set; }
+        public List<RoleModel> Roles { get; set; } = new List<RoleModel>();
     }
 }
