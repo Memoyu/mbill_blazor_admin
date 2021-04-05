@@ -5,51 +5,41 @@ using AntDesign.Pro.Layout;
 using Microsoft.AspNetCore.Components;
 using AntDesign;
 using mbill_blazor_admin.Core.Models;
+using mbill_blazor_admin.Services.Impl;
+using Microsoft.AspNetCore.Components.Authorization;
+using mbill_blazor_admin.Models.Core;
+using Microsoft.JSInterop;
+using mbill_blazor_admin.Services.Base;
+using Newtonsoft.Json;
+using System;
 
 namespace mbill_blazor_admin.Components
 {
-    public partial class RightContent
+    public partial class RightContent : AntDomComponentBase
     {
-        private CurrentUser _currentUser = new CurrentUser();
+        private UserModel _currentUser = new UserModel
+        {
+            Username = "未登录"
+        };
         private NoticeIconData[] _notifications = { };
         private NoticeIconData[] _messages = { };
         private NoticeIconData[] _events = { };
         private int _count = 0;
-
-        private List<AutoCompleteDataItem<string>> DefaultOptions { get; set; } = new List<AutoCompleteDataItem<string>>
-        {
-            new AutoCompleteDataItem<string>
-            {
-                Label = "umi ui",
-                Value = "umi ui"
-            },
-            new AutoCompleteDataItem<string>
-            {
-                Label = "Pro Table",
-                Value = "Pro Table"
-            },
-            new AutoCompleteDataItem<string>
-            {
-                Label = "Pro Layout",
-                Value = "Pro Layout"
-            }
-        };
 
         [Inject] protected NavigationManager NavigationManager { get; set; }
 
         //[Inject] protected IUserService UserService { get; set; }
         //[Inject] protected IProjectService ProjectService { get; set; }
         [Inject] protected MessageService MessageService { get; set; }
+        [Inject] protected AuthenticationStateProvider authenticationService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
             SetClassMap();
-            //_currentUser = await UserService.GetCurrentUserAsync();
-            _currentUser = new CurrentUser
-            {
-                Name = "Memoyu"
-            };
+            var user = await Js.InvokeAsync<string>("localStorage.getItem", localStorageConst.UserInfo);
+            if (!string.IsNullOrWhiteSpace(user))
+                _currentUser = JsonConvert.DeserializeObject<UserModel>(user);
             //var notices = await ProjectService.GetNoticesAsync();
             //_notifications = notices.Where(x => x.Type == "notification").Cast<NoticeIconData>().ToArray();
             //_messages = notices.Where(x => x.Type == "message").Cast<NoticeIconData>().ToArray();
@@ -64,7 +54,7 @@ namespace mbill_blazor_admin.Components
                 .Add("right");
         }
 
-        public void HandleSelectUser(MenuItem item)
+        public async void HandleSelectUser(MenuItem item)
         {
             switch (item.Key)
             {
@@ -75,7 +65,9 @@ namespace mbill_blazor_admin.Components
                     NavigationManager.NavigateTo("/account/settings");
                     break;
                 case "logout":
-                    NavigationManager.NavigateTo("/user/login");
+                    var authComp = authenticationService as AuthenticationService;
+                    await authComp.LogoutAsync();
+                    NavigationManager.NavigateTo("/account/login");
                     break;
             }
         }

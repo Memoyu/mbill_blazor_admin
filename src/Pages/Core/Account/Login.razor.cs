@@ -1,4 +1,6 @@
 ﻿using mbill_blazor_admin.Models.Core;
+using mbill_blazor_admin.Services;
+using mbill_blazor_admin.Services.Base;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,15 @@ namespace mbill_blazor_admin.Pages.Core.Account
     {
         private readonly LoginParams _loginModel = new LoginParams();
         [Inject] public NavigationManager NavigationManager { get; set; }
+        [Inject] protected ICoreService _coreService { get; set; }
 
-        public void HandleSubmit()
+        public async void HandleSubmit()
         {
-            if (_loginModel.UserName == "admin" && _loginModel.Password == "ant.design")
+            if (await _coreService.Login(_loginModel))
             {
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("/", true);
                 return;
             }
-
-            if (_loginModel.UserName == "user" && _loginModel.Password == "ant.design") NavigationManager.NavigateTo("/");
         }
     }
 }

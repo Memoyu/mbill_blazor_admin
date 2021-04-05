@@ -1,4 +1,4 @@
-﻿@layout CustomUserLayout
+﻿@layout CoreUserLayout
 @page "/account/login"
 
 
@@ -8,7 +8,7 @@
             <Form Model="@_loginModel" OnFinish="HandleSubmit">
                 <ChildContent>
                     <FormItem>
-                        <AntDesign.Input Placeholder="用户名" Size="large" @bind-Value="@context.UserName">
+                        <AntDesign.Input Placeholder="用户名" Size="large" @bind-Value="@context.Username">
                             <Prefix><Icon Type="user" /></Prefix>
                         </AntDesign.Input>
                     </FormItem>
@@ -17,9 +17,15 @@
                             <Prefix><Icon Type="lock" /></Prefix>
                         </AntDesign.Input>
                     </FormItem>
+                    <Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>登  陆 </Button>
+                    <FormItem>
+                        <Checkbox @bind-Value="@context.RememberMe">记住我！</Checkbox>
+                        <a style="float: right;">
+                            忘记密码？
+                        </a>
+                    </FormItem>
                 </ChildContent>
             </Form>
-            <Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>登  陆 </Button>
         </Card>
     </div>
 </div>

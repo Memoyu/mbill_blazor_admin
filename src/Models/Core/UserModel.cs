@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace mbill_blazor_admin.Models.Core
 {
-    public class UserModle
+    public class UserModel
     {
         public long Id { get; set; }
-
         /// <summary>
         /// 用户名
         /// </summary>
@@ -35,11 +34,6 @@ namespace mbill_blazor_admin.Models.Core
         public string Phone { get; set; }
 
         /// <summary>
-        /// 地址
-        /// </summary>
-        public string Address { get; set; }
-
-        /// <summary>
         /// 省
         /// </summary>
         public string Province { get; set; }
@@ -60,6 +54,11 @@ namespace mbill_blazor_admin.Models.Core
         public string Street { get; set; }
 
         /// <summary>
+        /// 地址详情
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
         /// 头像地址
         /// </summary>
         public string AvatarUrl { get; set; }
@@ -67,7 +66,7 @@ namespace mbill_blazor_admin.Models.Core
         /// <summary>
         /// 是否启用
         /// </summary>
-        public bool IsEnable { get; set; }
+        public bool IsEnable { get; set; } = true;
 
         public List<RoleModel> Roles { get; set; }
     }

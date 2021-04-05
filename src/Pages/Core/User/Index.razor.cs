@@ -11,9 +11,9 @@ namespace mbill_blazor_admin.Pages.Core.User
     public partial class Index
     {
         private ITable table;
-        private UserModle[] _users =
+        private UserModel[] _users =
         {
-            new UserModle
+            new UserModel
             {
                 Id=1,
                 Username = "蒙明宇",
@@ -37,7 +37,7 @@ namespace mbill_blazor_admin.Pages.Core.User
                 },
                 IsEnable= true
             },
-            new UserModle
+            new UserModel
             {
                 Id=2,
                 Username = "Administrator",
@@ -56,7 +56,7 @@ namespace mbill_blazor_admin.Pages.Core.User
                 },
                 IsEnable= true
             },
-            new UserModle
+            new UserModel
             {
                 Id=3,
                 Username = "Admin",
@@ -76,13 +76,13 @@ namespace mbill_blazor_admin.Pages.Core.User
                 IsEnable= true
             }
         };
-        private IEnumerable<UserModle> _selectedRows;
+        private IEnumerable<UserModel> _selectedRows;
         private int _pageIndex = 1;
         private int _pageSize = 10;
         private int _total = 0;
 
 
-        private async Task onChange(QueryModel<UserModle> queryModel)
+        private async Task onChange(QueryModel<UserModel> queryModel)
         {
             //forecasts = await GetForecastAsync(queryModel.PageIndex, queryModel.PageSize);
             _pageIndex = queryModel.PageIndex;

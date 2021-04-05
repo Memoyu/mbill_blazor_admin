@@ -1,0 +1,44 @@
+﻿@page "/account/center"
+
+<GridContent Class="card-content">
+    <Card Style="width:500px; margin-bottom: 24px;" >
+        <div class="avatarHolder">
+            <img alt="" src="@_currentUser.AvatarUrl" />
+            <div className="name">@_currentUser.Username</div>
+            <div>@_currentUser.Nickname</div>
+        </div>
+
+        <div class="detail">
+            <p>
+                <Icon Type="contacts" Theme="outline" Style="margin-right:8px;" />
+                @_currentUser.Address
+            </p>
+            <p>
+                <Icon Type="cluster" Theme="outline" Style="margin-right:8px;" />
+                @_currentUser.Address
+            </p>
+            <p>
+                <Icon Type="home" Theme="outline" Style="margin-right:8px;" />
+                <!--todo: add userinfo-->
+                @_currentUser.Address
+            </p>
+        </div>
+
+        <Divider Dashed />
+
+        <div class="tags">
+            <div class="tagsTitle">角色</div>
+            @foreach (var role in _currentUser.Roles)
+            {
+                <Tag Color="blue">@role.Name</Tag>
+            }
+        </div>
+
+        <Divider Dashed Style="margin-top: 16px;" />
+
+        <div class="team">
+            <div class="teamTitle">Team</div>
+            <!--todo: add notice-->
+        </div>
+    </Card>
+</GridContent>

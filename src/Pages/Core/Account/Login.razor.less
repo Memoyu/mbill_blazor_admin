@@ -1,11 +1,18 @@
 ﻿@import '~antd/es/style/themes/default.less';
 
 .main__b__0 {
-    width: 468px;
+    display: flex;
+    justify-content: center;
+    align-items: Center;
     margin: 0 auto;
+    height: 100%;
 
     @media screen and (max-width: @screen-sm) {
         width: 95%;
+    }
+
+    .login {
+        width: 500px;
     }
 
     .login-pre {
@@ -13,5 +20,8 @@
         padding: 12px 20px;
         background: @input-bg;
         box-shadow: @card-shadow;
+    }
+    .submit{
+        margin-top: 30px;
     }
 }

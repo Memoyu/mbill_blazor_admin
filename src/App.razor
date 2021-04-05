@@ -1,11 +1,13 @@
-<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(CustomBasicLayout)" />
-    </Found>
-    <NotFound>
-        <LayoutView Layout="@typeof(CustomBasicLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
-<AntContainer />
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(CoreBasicLayout)" />
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(CoreBasicLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+    <AntContainer />
+</CascadingAuthenticationState>
