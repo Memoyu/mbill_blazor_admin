@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,17 +22,15 @@ namespace mbill_blazor_admin.Services.Base
     public class CoreClient
     {
         private readonly HttpClient _httpClient;
-        private readonly IJSRuntime _jsRuntime;
         private readonly Appsettings _appsettings;
         private readonly AccountStorageService _accountStorageServic;
         private readonly MessageService _messageService;
 
-        public CoreClient(HttpClient httpClient, IJSRuntime jsRuntime, IOptions<Appsettings> options, AccountStorageService accountStorageService, MessageService messageService)
+        public CoreClient(HttpClient httpClient, IOptions<Appsettings> options, AccountStorageService accountStorageService, MessageService messageService)
         {
             _appsettings = options.Value;
             httpClient.BaseAddress = new Uri(_appsettings.CoreUrl);
             _httpClient = httpClient;
-            _jsRuntime = jsRuntime;
             _accountStorageServic = accountStorageService;
             _messageService = messageService;
         }
@@ -46,8 +45,7 @@ namespace mbill_blazor_admin.Services.Base
         /// <returns></returns>
         public async Task<TResult> PostResultAsync<TResult>(string url, object content = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : class
         {
-            var res = await BasePostAsync<ServiceResult<TResult>>(url, content, isHint, isUnToken, cancellationToken);
-            return res?.Result;
+            return (await BasePostAsync<ServiceResult<TResult>>(url, content, isHint, isUnToken, cancellationToken)).Result;
         }
 
 
@@ -60,8 +58,7 @@ namespace mbill_blazor_admin.Services.Base
         /// <returns></returns>
         public async Task<bool> PostAsync(string url, object content = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default)
         {
-            var res = await BasePostAsync<ServiceResult>(url, content, isHint, isUnToken, cancellationToken);
-            return res.Success;
+            return (await BasePostAsync<ServiceResult>(url, content, isHint, isUnToken, cancellationToken)).Success;
         }
 
         /// <summary>
@@ -72,14 +69,10 @@ namespace mbill_blazor_admin.Services.Base
         /// <param name="isUnToken">是否需要token</param>
         /// <param name="parameter">请求参数</param>
         /// <returns></returns>
-        public async Task<TResult> GetAsync<TResult>(string url, Dictionary<string, string> parameter = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : new()
+        public async Task<TResult> GetAsync<TResult>(string url,  bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : new()
         {
             try
             {
-                if (parameter != null)
-                {
-                    url = GetSpliceUrl(url, parameter);
-                }
                 if (isUnToken)
                 {
                     var token = await _accountStorageServic.GetTokenAsync();
@@ -115,11 +108,12 @@ namespace mbill_blazor_admin.Services.Base
             catch (Exception ex)
             {
                 if (isHint)
-                    await _messageService.Error(ex.Message);
+                    _messageService.Error(ex.Message);
 
             }
             return new TResult();
         }
+
 
         #region Private
 
@@ -130,7 +124,7 @@ namespace mbill_blazor_admin.Services.Base
         /// <param name="isUnToken">是否需要token</param>
         /// <param name="content">请求体</param>
         /// <returns></returns>
-        private async Task<T> BasePostAsync<T>(string url, object content = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where T : ServiceResult
+        private async Task<T> BasePostAsync<T>(string url, object content = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where T : ServiceResult, new()
         {
             var bodyJson = content == null ? "" : JsonConvert.SerializeObject(content);
             try
@@ -174,10 +168,9 @@ namespace mbill_blazor_admin.Services.Base
             catch (Exception ex)
             {
                 if (isHint)
-                    await _messageService.Error(ex.Message);
-
+                    _messageService.Error(ex.Message);
             }
-            return default(T);
+            return new T();
 
         }
 
@@ -208,7 +201,7 @@ namespace mbill_blazor_admin.Services.Base
             {
                 ServiceResult result = new ServiceResult();
                 var resultStr = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrWhiteSpace(resultStr))
+                if (!string.IsNullOrWhiteSpace(resultStr))
                 {
                     result = JsonConvert.DeserializeObject<ServiceResult>(resultStr);
                 }
@@ -217,17 +210,40 @@ namespace mbill_blazor_admin.Services.Base
         }
 
         /// <summary>
-        /// 获取拼接Uri
+        /// 获取拼接Uri(Dictionary)
         /// </summary>
         /// <param name="prefix">请求前缀地址</param>
         /// <param name="parameter">查询参数字典</param>
         /// <returns>Uri</returns>
-        public static string GetSpliceUrl(string prefix, Dictionary<string, string> parameter)
+        public static string GetSpliceUrlByDic(string prefix, Dictionary<string, string> parameter)
         {
             var query = HttpUtility.ParseQueryString(string.Empty);
             foreach (var item in parameter)
             {
                 query[item.Key] = item.Value;
+            }
+            string queryString = query.ToString();
+            var uri = prefix + (string.IsNullOrEmpty(queryString) ? "" : "?") + queryString;
+            //进行解码成中文格式，再返回
+            string result = HttpUtility.UrlDecode(uri, Encoding.GetEncoding("UTF-8"));
+            return result;
+        }
+
+        /// <summary>
+        /// 获取拼接Uri(Object)
+        /// </summary>
+        /// <param name="prefix">请求前缀地址</param>
+        /// <param name="parameter">查询参数字典</param>
+        /// <returns>Uri</returns>
+        public static string GetSpliceUrlByObj<T>(string prefix, T parameter)
+        {
+            Type t = parameter.GetType();
+            PropertyInfo[] props = t.GetProperties();
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var item in props)
+            {
+                query[item.Name] = item.GetValue(parameter)?.ToString();
             }
             string queryString = query.ToString();
             var uri = prefix + (string.IsNullOrEmpty(queryString) ? "" : "?") + queryString;

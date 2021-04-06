@@ -13,11 +13,11 @@
                         </AntDesign.Input>
                     </FormItem>
                     <FormItem>
-                        <AntDesign.Input Placeholder="密码" Size="large" @bind-Value="@context.Password" Type="password">
+                        <InputPassword Placeholder="密码" Size="large" @bind-Value="@context.Password">
                             <Prefix><Icon Type="lock" /></Prefix>
-                        </AntDesign.Input>
+                        </InputPassword>
                     </FormItem>
-                    <Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>登  陆 </Button>
+                    <Button Type="primary" Loading="loading" HtmlType="submit" Class="submit" Size="large" Block>登  陆 </Button>
                     <FormItem>
                         <Checkbox @bind-Value="@context.RememberMe">记住我！</Checkbox>
                         <a style="float: right;">

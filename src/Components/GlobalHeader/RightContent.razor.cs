@@ -12,10 +12,11 @@ using Microsoft.JSInterop;
 using mbill_blazor_admin.Services.Base;
 using Newtonsoft.Json;
 using System;
+using mbill_blazor_admin.Services;
 
 namespace mbill_blazor_admin.Components
 {
-    public partial class RightContent 
+    public partial class RightContent
     {
         private UserModel _currentUser = new UserModel
         {
@@ -29,21 +30,28 @@ namespace mbill_blazor_admin.Components
         [Inject] protected NavigationManager NavigationManager { get; set; }
         [Inject] protected MessageService MessageService { get; set; }
         [Inject] protected AuthenticationStateProvider authenticationService { get; set; }
+        [Inject] protected ICoreService coreService { get; set; }
         [Inject] protected IJSRuntime _jsRuntime { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            var user = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", localStorageConst.UserInfo);
-            Console.WriteLine("json" + user);
-            //if (!string.IsNullOrWhiteSpace(user))
-                _currentUser = JsonConvert.DeserializeObject<UserModel>(user);
-            Console.WriteLine("json2" + _currentUser.Address);
-
             await base.OnInitializedAsync();
             SetClassMap();
+            _currentUser = await coreService.GetUserInfoByToken() ?? new UserModel { Username = "未登录" };
         }
 
-        
+        //protected override async Task OnAfterRenderAsync(bool firstRender)
+        //{
+        //    if (firstRender)
+        //    {
+        //        var user = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", localStorageConst.UserInfo);
+        //        Console.WriteLine("顶栏加载");
+        //        if (!string.IsNullOrWhiteSpace(user))
+        //            _currentUser = JsonConvert.DeserializeObject<UserModel>(user);
+        //        await InvokeAsync(StateHasChanged);
+        //    }
+        //    await base.OnAfterRenderAsync(firstRender);
+        //}
 
         protected void SetClassMap()
         {

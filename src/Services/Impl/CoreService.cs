@@ -1,5 +1,6 @@
 ﻿using AntDesign;
 using mbill_blazor_admin.Models.Base;
+using mbill_blazor_admin.Models.Base.Page;
 using mbill_blazor_admin.Models.Core;
 using mbill_blazor_admin.Services.Base;
 using Microsoft.JSInterop;
@@ -25,7 +26,7 @@ namespace mbill_blazor_admin.Services.Impl
 
         public async Task<bool> Login(LoginParams login)
         {
-            var result = await _client.PostResultAsync<TokenModel>(CoreUrl.Login, login, false);
+            var result = await _client.PostResultAsync<TokenModel>(CoreUrl.Login, login);
             if (result != null)
             {
                 await _accountStorageServic.SetTokenAsync(result.AccessToken, result.RefreshToken);
@@ -36,7 +37,14 @@ namespace mbill_blazor_admin.Services.Impl
 
         public async Task<UserModel> GetUserInfoByToken(bool isHintErr = true)
         {
-            return await _client.GetAsync<UserModel>(UserUrl.GetUserInfo, null, isHintErr);
+            return await _client.GetAsync<UserModel>(UserUrl.GetInfo, isHintErr);
+        }
+
+        public async Task<PagedDto<UserModel>> GetUserPages(UserPageParams pagingDto)
+        {
+            var url = CoreClient.GetSpliceUrlByObj(UserUrl.GetPages, pagingDto);
+            Console.WriteLine(url);
+            return await _client.GetAsync<PagedDto<UserModel>>(url);
         }
     }
 }

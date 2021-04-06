@@ -64,6 +64,11 @@ namespace mbill_blazor_admin.Models.Core
         public string AvatarUrl { get; set; }
 
         /// <summary>
+        /// 最后一次登录的时间
+        /// </summary>
+        public DateTime LastLoginTime { get; set; }
+
+        /// <summary>
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; } = true;

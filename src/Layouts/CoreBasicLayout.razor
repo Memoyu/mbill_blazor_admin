@@ -8,13 +8,16 @@
         <mbill_blazor_admin.Components.RightContent />
     </RightContentRender>
     <ChildContent>
-        @Body
+        <Spin Spinning="Loading" Delay="500">
+            @Body
+        </Spin>
     </ChildContent>
 </AntDesign.Pro.Layout.BasicLayout>
 
 @inject IHttpClientFactory httpClient
 @code
 {
+    [Parameter] public bool Loading { get; set; } = false;
     private RenderFragment _footerView =@<CustomFooter />;
     private MenuDataItem[] _menuData { get; set; } = { };
 

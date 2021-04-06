@@ -1,4 +1,5 @@
-﻿using mbill_blazor_admin.Models.Core;
+﻿using mbill_blazor_admin.Models.Base.Page;
+using mbill_blazor_admin.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,12 @@ namespace mbill_blazor_admin.Services
         /// </summary>
         /// <returns></returns>
         Task<UserModel> GetUserInfoByToken(bool isHintErr = true);
+
+        /// <summary>
+        /// 获取用户分页信息
+        /// </summary>
+        /// <param name="pagingDto"></param>
+        /// <returns></returns>
+        Task<PagedDto<UserModel>> GetUserPages(UserPageParams pagingDto);
     }
 }

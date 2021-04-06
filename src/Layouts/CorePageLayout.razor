@@ -1,0 +1,21 @@
+﻿@using mbill_blazor_admin.Components
+@inherits LayoutComponentBase
+
+<PageContainer Title="用户管理">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>主页</BreadcrumbItem>
+            <BreadcrumbItem>系统管理</BreadcrumbItem>
+            <BreadcrumbItem>用户管理</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+    <ChildContent>
+        <Spin Spinning="Loading">
+            @Body
+        </Spin>
+    </ChildContent>
+</PageContainer>
+
+@code{
+    [Parameter] public bool Loading { get; set; } = false;
+}

@@ -8,6 +8,7 @@
 
     public static class UserUrl
     {
-        public const string GetUserInfo = "user/get";
+        public const string GetInfo = "user/get";
+        public const string GetPages = "user/get/pages";
     }
 }

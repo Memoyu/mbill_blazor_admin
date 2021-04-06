@@ -10,21 +10,22 @@
             <BreadcrumbItem>用户管理</BreadcrumbItem>
         </Breadcrumb>
     </Breadcrumb>
-
     <ChildContent>
         <Card>
             <Table @ref="table"
                    TItem="UserModel"
                    DataSource="@_users"
+                   Loading="@_loading"
                    Total="_total"
+                   ScrollX="1600"
                    OnChange="@onChange"
-                   @bind-PageIndex="_pageIndex"
-                   @bind-PageSize="_pageSize"
+                   @bind-PageIndex="page.Page"
+                   @bind-PageSize="page.Size"
                    @bind-SelectedRows="_selectedRows">
                 @*<Selection Key="@(context.Id.ToString())" />*@
-                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable/>
-                <AntDesign.Column Title="昵称" @bind-Field="@context.Nickname" />
-                <AntDesign.Column Title="用户姓名" @bind-Field="@context.Username" />
+                <AntDesign.Column Title="ID" Width="80" Fixed="left" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="昵称" Width="130" Fixed="left" @bind-Field="@context.Nickname" />
+                <AntDesign.Column Title="用户姓名" Width="130" Fixed="left" @bind-Field="@context.Username" />
                 <AntDesign.Column Title="性别" @bind-Field="@context.Gender" />
                 <AntDesign.Column Title="邮箱" @bind-Field="@context.Email" />
                 <AntDesign.Column Title="电话" @bind-Field="@context.Phone" />
@@ -35,6 +36,7 @@
                         <Tag Color="blue">@role.Name</Tag>
                     }
                 </AntDesign.Column>
+                <AntDesign.Column Title="最后一次登陆时间" @bind-Field="@context.LastLoginTime" />
                 <AntDesign.Column Title="启用状态" Field="@context.IsEnable">
                     <Switch @bind-Value="@context.IsEnable"></Switch>
                 </AntDesign.Column>
@@ -48,16 +50,16 @@
                 </ActionColumn>
             </Table>
             @*<br />
-            <h5>已选:</h5>
-            @if (_selectedRows != null && _selectedRows.Any())
-            {
-                <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
-
-                @foreach (var selected in _selectedRows)
+                <h5>已选:</h5>
+                @if (_selectedRows != null && _selectedRows.Any())
                 {
-                    <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
-                }
-            }*@
+                    <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+
+                    @foreach (var selected in _selectedRows)
+                    {
+                        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
+                    }
+                }*@
         </Card>
     </ChildContent>
 </PageContainer>
