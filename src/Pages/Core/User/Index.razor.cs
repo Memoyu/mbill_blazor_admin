@@ -1,5 +1,6 @@
 ﻿using AntDesign;
 using AntDesign.TableModels;
+using mbill_blazor_admin.Models.Base;
 using mbill_blazor_admin.Models.Core;
 using mbill_blazor_admin.Services;
 using Microsoft.AspNetCore.Components;
@@ -12,75 +13,18 @@ namespace mbill_blazor_admin.Pages.Core.User
 {
     public partial class Index
     {
+        private List<SelectModel> _isEnableStatus = new List<SelectModel>
+        {
+            new SelectModel {Id = -1, Name="全部", NotAvailable = false  },
+            new SelectModel {Id = 1, Name="启用", NotAvailable = false  },
+            new SelectModel {Id = 0, Name="禁用", NotAvailable = false  }
+        };
+        private int? _selectedValue = 1;
         private bool _loading = false;
         private ITable table;
-        private UserModel[] _users =
-        {
-            new UserModel
-            {
-                Id=1,
-                Username = "蒙明宇",
-                Nickname="Memoyu",
-                Gender="男",
-                Email = "mmy6076@outlook.com",
-                Phone = "1887861343",
-                Address="白云区",
-                Roles = new List<RoleModel>
-                {
-                    new RoleModel
-                    {
-                        Id=3,
-                        Name="User"
-                    },
-                    new RoleModel
-                    {
-                        Id=1,
-                        Name="Admin"
-                    }
-                },
-                IsEnable= true
-            },
-            new UserModel
-            {
-                Id=2,
-                Username = "Administrator",
-                Nickname="Administrator",
-                Gender="男",
-                Email = "mmy0925@outlook.com",
-                Phone = "1887861343",
-                Address="白云区",
-                Roles = new List<RoleModel>
-                {
-                    new RoleModel
-                    {
-                        Id=2,
-                        Name="Admin"
-                    }
-                },
-                IsEnable= true
-            },
-            new UserModel
-            {
-                Id=3,
-                Username = "Admin",
-                Nickname="Admin",
-                Gender="男",
-                Email = "mmy6076@outlook.com",
-                Phone = "1887861343",
-                Address="白云区",
-                Roles = new List<RoleModel>
-                {
-                    new RoleModel
-                    {
-                        Id=1,
-                        Name="Administrator"
-                    }
-                },
-                IsEnable= true
-            }
-        };
+        private UserModel[] _users = { };
         private IEnumerable<UserModel> _selectedRows;
-        private UserPageParams page =new UserPageParams {Page = 0 ,Size = 10 };
+        private UserPageParams page = new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
         [Inject] protected ICoreService coreService { get; set; }
 
@@ -92,6 +36,11 @@ namespace mbill_blazor_admin.Pages.Core.User
             _users = user.Items.ToArray();
             _total = (int)user.Total;
             _loading = false;
+
+        }
+
+        private void IsEnableHandleChange(SelectModel value)
+        {
 
         }
 
@@ -121,5 +70,6 @@ namespace mbill_blazor_admin.Pages.Core.User
         private void Edit()
         {
         }
+
     }
 }

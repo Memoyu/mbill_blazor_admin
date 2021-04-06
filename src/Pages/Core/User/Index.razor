@@ -1,4 +1,5 @@
 ﻿@using mbill_blazor_admin.Models.Core
+@using mbill_blazor_admin.Models.Base
 @namespace mbill_blazor_admin.Pages.Core.User
 @page "/core/user"
 
@@ -11,6 +12,21 @@
         </Breadcrumb>
     </Breadcrumb>
     <ChildContent>
+        <Card>
+            <Form Model="page" Layout="inline">
+                <FormItem Label="是否启用">
+                    <Select DataSource="@_isEnableStatus"
+                            @bind-Value="@context.IsEnable"
+                            ValueName="@nameof(SelectModel.Id)"
+                            LabelName="@nameof(SelectModel.Name)"
+                            DisabledName="@nameof(SelectModel.NotAvailable)"
+                            Style="width:120px"
+                            OnSelectedItemChanged="IsEnableHandleChange">
+                    </Select>
+                </FormItem>
+
+            </Form>
+        </Card>
         <Card>
             <Table @ref="table"
                    TItem="UserModel"
