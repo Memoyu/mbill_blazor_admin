@@ -43,7 +43,7 @@ namespace mbill_blazor_admin.Services.Impl
         public async Task<PagedDto<UserModel>> GetUserPages(UserPageParams pagingDto)
         {
             var url = CoreClient.GetSpliceUrlByObj(UserUrl.GetPages, pagingDto);
-            Console.WriteLine(url);
+            Console.WriteLine("获取用户分页数据");
             return await _client.GetAsync<PagedDto<UserModel>>(url);
         }
     }

@@ -24,7 +24,7 @@ namespace mbill_blazor_admin.Pages.Core.User
         private ITable table;
         private UserModel[] _users = { };
         private IEnumerable<UserModel> _selectedRows;
-        private UserPageParams page = new UserPageParams { Page = 0, Size = 10 };
+        private UserPageParams page =new UserPageParams { };//new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
         [Inject] protected ICoreService coreService { get; set; }
 
@@ -46,6 +46,7 @@ namespace mbill_blazor_admin.Pages.Core.User
 
         private async Task onChange(QueryModel<UserModel> queryModel)
         {
+            Console.WriteLine("分页改变");
             page.Page = queryModel.PageIndex;
             page.Size = queryModel.PageSize;
             var user = await coreService.GetUserPages(page);

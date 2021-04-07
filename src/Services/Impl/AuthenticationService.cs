@@ -32,7 +32,6 @@ namespace mbill_blazor_admin.Services.Impl
             // 获取用户信息
             var user = await _coreService.GetUserInfoByToken(false);
             if (user == null) GetUnAuthState();
-            Console.WriteLine("授权写入");
             await _jsRuntime.InvokeVoidAsync("localStorage.setItem", localStorageConst.UserInfo, JsonConvert.SerializeObject(user));
 
             var identity = new ClaimsIdentity(new[]
