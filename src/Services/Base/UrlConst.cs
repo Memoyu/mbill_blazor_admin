@@ -4,6 +4,7 @@
     public static class CoreUrl
     {
         public const string Login = "account/login";
+        public const string GetAllRoles = "admin/role/get/all";
     }
 
     public static class UserUrl

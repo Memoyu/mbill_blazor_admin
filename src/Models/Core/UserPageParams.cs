@@ -12,9 +12,9 @@ namespace mbill_blazor_admin.Models.Core
 
         public string Nickname { get; set; }
 
-        public int? IsEnable { get; set; }
+        public int IsEnable { get; set; } = -1;
 
-        public long? RoleId { get; set; }
+        public long RoleId { get; set; } = -1;
 
         public DateTime? CreateTime { get; set; }
     }

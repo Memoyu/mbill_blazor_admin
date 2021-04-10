@@ -28,5 +28,11 @@ namespace mbill_blazor_admin.Services
         /// <param name="pagingDto"></param>
         /// <returns></returns>
         Task<PagedDto<UserModel>> GetUserPages(UserPageParams pagingDto);
+
+        /// <summary>
+        /// 获取全部角色信息
+        /// </summary>
+        /// <returns></returns>
+        Task<List<RoleModel>> GetRoles();
     }
 }
