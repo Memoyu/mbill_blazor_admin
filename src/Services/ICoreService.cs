@@ -34,5 +34,18 @@ namespace mbill_blazor_admin.Services
         /// </summary>
         /// <returns></returns>
         Task<List<RoleModel>> GetRoles();
+
+        /// <summary>
+        /// 获取权限树形信息
+        /// </summary>
+        /// <returns></returns>
+        Task<List<PermissionTreeModel>> GetPremisssionTrees();
+
+        /// <summary>
+        /// 获取日志记录
+        /// </summary>
+        /// <param name="pagingDto"></param>
+        /// <returns></returns>
+        Task<PagedDto<LogModel>> GetLogs(LogPageParams pagingDto);
     }
 }

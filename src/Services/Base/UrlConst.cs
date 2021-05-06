@@ -4,12 +4,15 @@
     public static class CoreUrl
     {
         public const string Login = "account/login";
-        public const string GetAllRoles = "admin/role/get/all";
+        public const string GetUserInfo = "account/user";
+        public const string GetAllRoles = "admin/role/all";
+        public const string GetPermissionTrees = "admin/permission/tree";
+        public const string GetLogs = "admin/log/pages";
     }
 
     public static class UserUrl
     {
-        public const string GetInfo = "user/get";
-        public const string GetPages = "user/get/pages";
+        public const string GetPages = "admin/user/pages";
     }
+
 }

@@ -47,7 +47,7 @@ namespace mbill_blazor_admin.Pages.Core.User
             page.Size = queryModel.PageSize;
             await GetUsers();
         }
-
+         
         private void Delete(long id)
         {
             _users = _users.Where(x => x.Id != id).ToArray();

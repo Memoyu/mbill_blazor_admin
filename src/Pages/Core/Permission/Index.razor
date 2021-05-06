@@ -1,4 +1,5 @@
 ﻿@namespace mbill_blazor_admin.Pages.Core.Permission
+@using mbill_blazor_admin.Models.Core
 @page "/core/permission"
 
 <PageContainer Title="日志管理">
@@ -12,7 +13,14 @@
 
     <ChildContent>
         <Card>
-
+            <Table DataSource="@_permissionTrees"
+                   HidePagination="@true"
+                   TreeChildren="item=>item.Children">
+                <AntDesign.Column Title="#" Width="50" @bind-Field="@context.Rowkey" />
+                <AntDesign.Column Title="权限名" Width="130" @bind-Field="@context.Name" />
+                <AntDesign.Column Title="接口地址" Width="200" @bind-Field="@context.Router" />
+                <AntDesign.Column Title="创建时间" Width="130" @bind-Field="@context.CreateTime" />
+            </Table>
         </Card>
     </ChildContent>
 </PageContainer>

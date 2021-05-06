@@ -37,7 +37,7 @@ namespace mbill_blazor_admin.Services.Impl
 
         public async Task<UserModel> GetUserInfoByToken(bool isHintErr = true)
         {
-            return await _client.GetAsync<UserModel>(UserUrl.GetInfo, isHintErr);
+            return await _client.GetAsync<UserModel>(CoreUrl.GetUserInfo, isHintErr);
         }
 
         public async Task<PagedDto<UserModel>> GetUserPages(UserPageParams pagingDto)
@@ -51,6 +51,21 @@ namespace mbill_blazor_admin.Services.Impl
         public async Task<List<RoleModel>> GetRoles()
         {
             return await _client.GetAsync<List<RoleModel>>(CoreUrl.GetAllRoles);
+        }
+
+        #endregion
+
+        #region Permission
+
+        public async Task<List<PermissionTreeModel>> GetPremisssionTrees()
+        {
+            return await _client.GetAsync<List<PermissionTreeModel>>(CoreUrl.GetPermissionTrees);
+        }
+
+        public async Task<PagedDto<LogModel>> GetLogs(LogPageParams pagingDto)
+        {
+            var url = CoreClient.GetSpliceUrlByObj(CoreUrl.GetLogs, pagingDto);
+            return await _client.GetAsync<PagedDto<LogModel>>(url);
         }
 
         #endregion
