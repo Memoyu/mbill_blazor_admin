@@ -26,8 +26,6 @@ namespace mbill_blazor_admin.Pages.Core.Logger
         private async Task onChange(QueryModel<LogModel> queryModel)
         {
             Console.WriteLine("分页改变");
-            page.Page = queryModel.PageIndex;
-            page.Size = queryModel.PageSize;
             await GetLogs();
         }
 

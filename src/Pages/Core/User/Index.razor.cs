@@ -13,7 +13,6 @@ namespace mbill_blazor_admin.Pages.Core.User
 {
     public partial class Index
     {
-        private ITable table;
         private SelectModel[] _isEnableStatus =
         {
             new SelectModel {Id = -1, Name="全部", NotAvailable = false  },
@@ -23,16 +22,18 @@ namespace mbill_blazor_admin.Pages.Core.User
         private RoleModel[] _rolesInfo = { };
         private UserModel[] _users = { };
         private bool _loading = false;
-        private UserPageParams page = new UserPageParams { };//new UserPageParams { Page = 0, Size = 10 };
+        private UserPageParams page = new UserPageParams { Size = 1};//new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
         [Inject] protected ICoreService coreService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
+            
+            //var roles = await coreService.GetRoles();
+            //roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
+            //_rolesInfo = roles.ToArray();
             await base.OnInitializedAsync();
-            var roles = await coreService.GetRoles();
-            roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
-            _rolesInfo = roles.ToArray();
+            
         }
 
         private void IsEnableHandleChange(SelectModel value)
@@ -43,8 +44,6 @@ namespace mbill_blazor_admin.Pages.Core.User
         private async Task onChange(QueryModel<UserModel> queryModel)
         {
             Console.WriteLine("分页改变");
-            page.Page = queryModel.PageIndex;
-            page.Size = queryModel.PageSize;
             await GetUsers();
         }
          
