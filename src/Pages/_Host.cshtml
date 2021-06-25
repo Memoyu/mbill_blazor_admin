@@ -1,0 +1,33 @@
+﻿@page "/"
+@namespace mbill_blazor_admin.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="mbill,admin,账单,管理" />
+    <meta name="description" content="个人账单后台管理" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mbill Admin</title>
+    <base href="~/" />
+    <link href="_content/AntDesign/css/ant-design-blazor.css" rel="stylesheet" />
+    <link href="_content/AntDesign.ProLayout/css/ant-design-pro-layout-blazor.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" id="theme-style" href="/_content/AntDesign.ProLayout/theme/purple.css">
+    <link href="./css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="Server" />
+    </app>
+
+    <script src="_content/AntDesign.Charts/g2plot.js"></script>
+    <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
+    <script src="_content/AntDesign.Charts/ant-design-charts-blazor.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+   
+</body>
+</html>

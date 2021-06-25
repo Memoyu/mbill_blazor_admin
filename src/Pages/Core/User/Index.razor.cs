@@ -22,7 +22,7 @@ namespace mbill_blazor_admin.Pages.Core.User
         private RoleModel[] _rolesInfo = { };
         private UserModel[] _users = { };
         private bool _loading = false;
-        private UserPageParams page = new UserPageParams { Size = 1};//new UserPageParams { Page = 0, Size = 10 };
+        private UserPageParams page = new UserPageParams();//new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
         [Inject] protected ICoreService coreService { get; set; }
 

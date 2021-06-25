@@ -1,22 +1,22 @@
 ﻿@using mbill_blazor_admin.Components
 @inherits LayoutComponentBase
 
-<AntDesign.Pro.Layout.BasicLayout Logo="@("./logo.svg")"
-                                  MenuData="_menuData"
-                                  FooterRender=_footerView>
+<BasicLayout Logo="@("./logo.svg")"
+             MenuData="_menuData"
+             FooterRender=_footerView>
     <RightContentRender>
-        <mbill_blazor_admin.Components.RightContent />
+        <RightContent />
     </RightContentRender>
     <ChildContent>
         <Spin Spinning="Loading" Delay="500">
             @Body
         </Spin>
     </ChildContent>
-</AntDesign.Pro.Layout.BasicLayout>
+</BasicLayout>
 
-@inject IHttpClientFactory httpClient
 @code
 {
+    [Inject] public HttpClient httpClient { get; set; }
     [Parameter] public bool Loading { get; set; } = false;
     private RenderFragment _footerView =@<CustomFooter />;
     private MenuDataItem[] _menuData { get; set; } = { };
@@ -24,6 +24,6 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        _menuData = await httpClient.CreateClient("local").GetFromJsonAsync<MenuDataItem[]>("data/menu.json");
+        _menuData = await httpClient.GetFromJsonAsync<MenuDataItem[]>("data/menu.json");
     }
 }

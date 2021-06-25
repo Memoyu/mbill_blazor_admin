@@ -1,12 +1,10 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core;
 using mbill_blazor_admin.Services.Base;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace mbill_blazor_admin.Services.Impl
 {
@@ -32,7 +30,7 @@ namespace mbill_blazor_admin.Services.Impl
             // 获取用户信息
             var user = await _coreService.GetUserInfoByToken(false);
             if (user == null) GetUnAuthState();
-            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", localStorageConst.UserInfo, JsonConvert.SerializeObject(user));
+            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", localStorageConst.UserInfo, JsonSerializer.Serialize(user));
 
             var identity = new ClaimsIdentity(new[]
               {

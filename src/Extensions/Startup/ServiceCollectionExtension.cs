@@ -1,10 +1,10 @@
 ﻿using mbill_blazor_admin.Services.Base;
 using mbill_blazor_admin.Services;
 using mbill_blazor_admin.Services.Impl;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components;
 
 namespace mbill_blazor_admin.Extensions.Startup
 {
@@ -13,14 +13,10 @@ namespace mbill_blazor_admin.Extensions.Startup
         /// <summary>
         /// 注册HttpClient
         /// </summary>
-        /// <param name="builder"></param>
-        public static void AddCoreHttpClient(this WebAssemblyHostBuilder builder)
+        /// <param name="services"></param>
+        public static void AddCoreHttpClient(this IServiceCollection services)
         {
-            builder.Services.AddHttpClient("local", config => // 本地请求
-            {
-                config.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-            });
-            builder.Services.AddHttpClient<CoreClient>();// MBill WebAPI 服务
+            services.AddHttpClient<CoreClient>();// MBill WebAPI 服务
         }
         /// <summary>
         /// 注册服务

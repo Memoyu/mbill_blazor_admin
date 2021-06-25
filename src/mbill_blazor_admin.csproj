@@ -1,37 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntDesign" Version="0.8.1" />
     <PackageReference Include="AntDesign.Charts" Version="0.2.1" />
-    <PackageReference Include="AntDesign.Pro.Layout" Version="0.1.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.6" />
+    <PackageReference Include="AntDesign.ProLayout" Version="0.1.0-nightly-210513142421" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.6" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />-->
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Bill\" />
-    <Folder Include="Pages\Bill\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\css\site.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\data\menu.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
+  
   <PropertyGroup Condition=" '$(SolutionDir)'==''">
     <SolutionDir>./</SolutionDir>
   </PropertyGroup>

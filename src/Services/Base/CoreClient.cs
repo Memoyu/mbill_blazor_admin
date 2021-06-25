@@ -3,19 +3,18 @@ using mbill_blazor_admin.Common.Tools;
 using mbill_blazor_admin.Models.Base;
 using mbill_blazor_admin.Services.Impl;
 using Microsoft.Extensions.Options;
-using Microsoft.JSInterop;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using mbill_blazor_admin.Extensions.Json;
 
 namespace mbill_blazor_admin.Services.Base
 {
@@ -85,7 +84,7 @@ namespace mbill_blazor_admin.Services.Base
                     if (response.IsSuccessStatusCode)
                     {
                         var resultStr = await response.Content.ReadAsStringAsync();
-                        var result = JsonConvert.DeserializeObject<ServiceResult<TResult>>(resultStr);
+                        var result = resultStr.Deserialize<ServiceResult<TResult>>();
                         if (result.Success)
                         {
                             return result.Result;
@@ -126,7 +125,7 @@ namespace mbill_blazor_admin.Services.Base
         /// <returns></returns>
         private async Task<T> BasePostAsync<T>(string url, object content = null, bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where T : ServiceResult, new()
         {
-            var bodyJson = content == null ? "" : JsonConvert.SerializeObject(content);
+            var bodyJson = content == null ? "" : JsonSerializer.Serialize(content);
             try
             {
                 if (isUnToken)
@@ -145,7 +144,7 @@ namespace mbill_blazor_admin.Services.Base
                     if (response.IsSuccessStatusCode)
                     {
                         var resultStr = await response.Content.ReadAsStringAsync();
-                        var result = JsonConvert.DeserializeObject<T>(resultStr);
+                        var result = resultStr.Deserialize<T>();
                         if (result.Success)
                         {
                             return result;
@@ -203,7 +202,7 @@ namespace mbill_blazor_admin.Services.Base
                 var resultStr = await response.Content.ReadAsStringAsync();
                 if (!string.IsNullOrWhiteSpace(resultStr))
                 {
-                    result = JsonConvert.DeserializeObject<ServiceResult>(resultStr);
+                    result = resultStr.Deserialize<ServiceResult>();
                 }
                 return result.Message ?? "请求失败，请联系管理员！";
             }
