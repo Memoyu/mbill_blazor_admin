@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using mbill_blazor_admin.Models.Core.Input;
+using mbill_blazor_admin.Models.Core.Output;
 
 namespace mbill_blazor_admin.Services
 {
@@ -41,6 +43,13 @@ namespace mbill_blazor_admin.Services
         /// <param name="id">角色</param>
         /// <returns></returns>
         Task<RoleDetailModel> GetRoleDetail(long id);
+
+        /// <summary>
+        /// 修改角色权限
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <returns></returns>
+        Task<bool> EditRolePermission(DispatchPermissionsParams model);
 
         /// <summary>
         /// 获取权限树形信息

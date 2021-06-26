@@ -1,4 +1,4 @@
-﻿namespace mbill_blazor_admin.Models.Core
+﻿namespace mbill_blazor_admin.Models.Core.Output
 {
     public class TokenModel
     {

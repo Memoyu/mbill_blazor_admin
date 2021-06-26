@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Components;
 using AntDesign;
 using mbill_blazor_admin.Services.Impl;
 using Microsoft.AspNetCore.Components.Authorization;
-using mbill_blazor_admin.Models.Core;
 using Microsoft.JSInterop;
 using mbill_blazor_admin.Services;
 using AntDesign.ProLayout;
+using mbill_blazor_admin.Models.Core.Output;
 
 namespace mbill_blazor_admin.Components
 {

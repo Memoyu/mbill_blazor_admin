@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core;
+using AntDesign;
+using mbill_blazor_admin.Models.Core.Input;
+using mbill_blazor_admin.Models.Core.Output;
 using mbill_blazor_admin.Services;
 using mbill_blazor_admin.Services.Impl;
 using Microsoft.AspNetCore.Components;
@@ -39,8 +40,23 @@ namespace mbill_blazor_admin.Pages.Core.Role
 
         private async Task Save()
         {
-            var temp = _permissionCards;
+            var checkedPermissionIds = new List<long>();
+            _permissionCards.ForEach(pc =>
+            {
+                foreach (var item in pc.PermissionChecks)
+                    if (item.Checked)
+                        checkedPermissionIds.Add(item.Id);
+            });
+
+            var model = new DispatchPermissionsParams
+            {
+                RoleId = Id,
+                PermissionIds = checkedPermissionIds
+            };
+
+            var res = await CoreService.EditRolePermission(model);
         }
+
         private async Task GoBack()
         {
         }

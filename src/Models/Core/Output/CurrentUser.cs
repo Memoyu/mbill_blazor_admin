@@ -1,4 +1,4 @@
-﻿namespace mbill_blazor_admin.Core.Models
+﻿namespace mbill_blazor_admin.Models.Core.Output
 {
     public class TagType
     {

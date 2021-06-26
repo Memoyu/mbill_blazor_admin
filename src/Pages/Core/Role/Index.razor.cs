@@ -10,8 +10,6 @@
 *   功能描述 ：
 ***************************************************************************/
 using AntDesign;
-using AntDesign.TableModels;
-using mbill_blazor_admin.Models.Core;
 using mbill_blazor_admin.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -19,6 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using mbill_blazor_admin.Common.Const;
+using mbill_blazor_admin.Models.Core.Output;
 
 namespace mbill_blazor_admin.Pages.Core.Role
 {
@@ -34,9 +34,15 @@ namespace mbill_blazor_admin.Pages.Core.Role
 
         protected override async Task OnInitializedAsync()
         {
-            _roles = (await CoreService.GetRoles()).ToArray();
+            var roles = (await CoreService.GetRoles()).Select(r =>
+            {
+                if (r.Id == StaticRole.Administrator)
+                    r.IsAdministrator = true;
+                return r;
+            }).ToArray();
+            _roles = roles;
             await base.OnInitializedAsync();
-          
+
         }
 
         private void Delete(long id)

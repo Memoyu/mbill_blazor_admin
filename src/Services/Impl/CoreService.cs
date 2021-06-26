@@ -1,13 +1,10 @@
 ﻿using AntDesign;
-using mbill_blazor_admin.Models.Base;
 using mbill_blazor_admin.Models.Base.Page;
-using mbill_blazor_admin.Models.Core;
 using mbill_blazor_admin.Services.Base;
-using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using mbill_blazor_admin.Models.Core.Input;
+using mbill_blazor_admin.Models.Core.Output;
 
 namespace mbill_blazor_admin.Services.Impl
 {
@@ -56,6 +53,16 @@ namespace mbill_blazor_admin.Services.Impl
         public async Task<RoleDetailModel> GetRoleDetail(long id)
         {
             return await _client.GetAsync<RoleDetailModel>(string.Format(CoreUrl.GetRoleDetail, id));
+        }
+
+        public async Task<bool> EditRolePermission(DispatchPermissionsParams model)
+        {
+            var result = await _client.PostAsync(CoreUrl.EditRolePermission, model);
+            if (result)
+                await _messageService.Success("修改权限成功");
+            else
+                await _messageService.Error("修改权限失败");
+            return result;
         }
 
         #endregion

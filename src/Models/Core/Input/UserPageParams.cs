@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.Core
+namespace mbill_blazor_admin.Models.Core.Input
 {
     public class UserPageParams : PagingDto
     {

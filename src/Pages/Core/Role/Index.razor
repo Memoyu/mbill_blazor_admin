@@ -1,4 +1,4 @@
-﻿@using mbill_blazor_admin.Models.Core
+﻿@using mbill_blazor_admin.Models.Core.Output
 @namespace mbill_blazor_admin.Pages.Core.Role
 @page "/core/role"
 
@@ -25,14 +25,17 @@
 					<Checkbox Disabled="true" @bind-Checked="@context.IsStatic"></Checkbox>
 				</AntDesign.Column>
 				<ActionColumn Title="操作">
-					<Space>
-						<SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit(context)">编辑</Button></SpaceItem>
-						<SpaceItem><Button OnClick="()=>Permission(context.Id)">权限</Button></SpaceItem>
-                        @if (!@context.IsStatic)
+                    <Space>
+						@if(!@context.IsAdministrator)
 						{
-						    <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                            <SpaceItem><Button Type="primary" Ghost OnClick="() => Edit(context)">编辑</Button></SpaceItem>
+                            <SpaceItem><Button OnClick="() => Permission(context.Id)">权限</Button></SpaceItem>
+                            @if (!@context.IsStatic)
+                            {
+                                <SpaceItem><Button Danger OnClick="() => Delete(context.Id)">删除</Button></SpaceItem>
+                            }
 						}
-					</Space>
+                    </Space>
 				</ActionColumn>
 			</Table>
 		</Card>
