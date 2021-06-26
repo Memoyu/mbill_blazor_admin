@@ -3,7 +3,7 @@
     "mbill_blazor_admin": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:10086;http://localhost:10087",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

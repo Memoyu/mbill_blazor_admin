@@ -1,0 +1,15 @@
+﻿@namespace mbill_blazor_admin.Pages.Core.Role
+
+<div class="permissionCard">
+    <Checkbox Style="font-weight: bold" Indeterminate="@indeterminate" Checked="@checkAll" CheckedChange="@CheckAllChanged">@Title</Checkbox>
+    <div class="checkGroup">
+        <Row Gutter="(16,16)">
+                @foreach (var check in Checks)
+                {
+                    <AntDesign.Col Class="gutter-row" Span="6">
+                        <Checkbox @bind-Checked="@check.Checked">@check.Title</Checkbox>
+                    </AntDesign.Col>
+                }
+        </Row>
+    </div>
+</div>

@@ -36,6 +36,13 @@ namespace mbill_blazor_admin.Services
         Task<List<RoleModel>> GetRoles();
 
         /// <summary>
+        /// 获取角色详情
+        /// </summary>
+        /// <param name="id">角色</param>
+        /// <returns></returns>
+        Task<RoleDetailModel> GetRoleDetail(long id);
+
+        /// <summary>
         /// 获取权限树形信息
         /// </summary>
         /// <returns></returns>

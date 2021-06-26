@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace mbill_blazor_admin.Services.Impl
 {
-    public class AccountStorageService
+    public class AccountStorageJsService
     {
         private readonly IJSRuntime _jsRuntime;
         private readonly NavigationManager _navigationManager;
-        public AccountStorageService(IJSRuntime jsRuntime, NavigationManager navigationManager)
+        public AccountStorageJsService(IJSRuntime jsRuntime, NavigationManager navigationManager)
         {
             _jsRuntime = jsRuntime;
             _navigationManager = navigationManager;

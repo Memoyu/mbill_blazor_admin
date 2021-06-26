@@ -1,0 +1,24 @@
+﻿@page "/core/role/edit/{Id:long}"
+
+<PageContainer Title="修改权限">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>主页</BreadcrumbItem>
+            <BreadcrumbItem>系统管理</BreadcrumbItem>
+            <BreadcrumbItem>修改权限</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+    <ChildContent>
+        <div>
+            @foreach (var p in _permissionCards)
+            {
+                <PermissionCheckGroup Title="@p.Title" Checks="@p.PermissionChecks"/>
+            }
+        </div>
+        <div style="text-align: center">
+            <Button Type="primary" OnClick="Save">确定</Button>
+            <Button OnClick="GoBack">返回</Button>
+        </div>
+
+    </ChildContent>
+</PageContainer>

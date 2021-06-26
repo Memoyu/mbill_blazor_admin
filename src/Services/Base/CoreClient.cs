@@ -22,15 +22,15 @@ namespace mbill_blazor_admin.Services.Base
     {
         private readonly HttpClient _httpClient;
         private readonly Appsettings _appsettings;
-        private readonly AccountStorageService _accountStorageServic;
+        private readonly AccountStorageJsService _accountStorageJsServic;
         private readonly MessageService _messageService;
 
-        public CoreClient(HttpClient httpClient, IOptions<Appsettings> options, AccountStorageService accountStorageService, MessageService messageService)
+        public CoreClient(HttpClient httpClient, IOptions<Appsettings> options, AccountStorageJsService accountStorageJsService, MessageService messageService)
         {
             _appsettings = options.Value;
             httpClient.BaseAddress = new Uri(_appsettings.CoreUrl);
             _httpClient = httpClient;
-            _accountStorageServic = accountStorageService;
+            _accountStorageJsServic = accountStorageJsService;
             _messageService = messageService;
         }
 
@@ -66,7 +66,6 @@ namespace mbill_blazor_admin.Services.Base
         /// <typeparam name="TResult"></typeparam>
         /// <param name="url">请求地址</param>
         /// <param name="isUnToken">是否需要token</param>
-        /// <param name="parameter">请求参数</param>
         /// <returns></returns>
         public async Task<TResult> GetAsync<TResult>(string url,  bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : new()
         {
@@ -74,7 +73,7 @@ namespace mbill_blazor_admin.Services.Base
             {
                 if (isUnToken)
                 {
-                    var token = await _accountStorageServic.GetTokenAsync();
+                    var token = await _accountStorageJsServic.GetTokenAsync();
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 }
@@ -130,7 +129,7 @@ namespace mbill_blazor_admin.Services.Base
             {
                 if (isUnToken)
                 {
-                    var token = await _accountStorageServic.GetTokenAsync();
+                    var token = await _accountStorageJsServic.GetTokenAsync();
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 }
                 HttpResponseMessage response;
@@ -184,7 +183,7 @@ namespace mbill_blazor_admin.Services.Base
 
             if (code == HttpStatusCode.Unauthorized || code == HttpStatusCode.UnprocessableEntity)
             {
-                await _accountStorageServic.RemoveTokenAsync();
+                await _accountStorageJsServic.RemoveTokenAsync();
                 throw new Exception(await GetResult());
             }
             else if (code == HttpStatusCode.NotFound || code == HttpStatusCode.BadRequest || code == HttpStatusCode.InternalServerError)

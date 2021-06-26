@@ -43,7 +43,8 @@ namespace mbill_blazor_admin
             services.Configure<Appsettings>(Configuration.GetSection("Appsettings"));
 
             // 注册用户信息相关Storage操作
-            services.AddScoped<AccountStorageService>();
+            services.AddScoped<AccountStorageJsService>();
+            services.AddScoped<CommonJsService>();
 
             // 注册HttpClient
             services.AddCoreHttpClient();

@@ -15,13 +15,13 @@ namespace mbill_blazor_admin.Services.Impl
     {
         private readonly CoreClient _client;
         private readonly MessageService _messageService;
-        private readonly AccountStorageService _accountStorageServic;
+        private readonly AccountStorageJsService _accountStorageJsServic;
 
-        public CoreService(CoreClient client, MessageService messageService, AccountStorageService accountStorageService)
+        public CoreService(CoreClient client, MessageService messageService, AccountStorageJsService accountStorageJsService)
         {
             _client = client;
             _messageService = messageService;
-            _accountStorageServic = accountStorageService;
+            _accountStorageJsServic = accountStorageJsService;
         }
 
         public async Task<bool> Login(LoginParams login)
@@ -29,7 +29,7 @@ namespace mbill_blazor_admin.Services.Impl
             var result = await _client.PostResultAsync<TokenModel>(CoreUrl.Login, login);
             if (result != null)
             {
-                await _accountStorageServic.SetTokenAsync(result.AccessToken, result.RefreshToken);
+                await _accountStorageJsServic.SetTokenAsync(result.AccessToken, result.RefreshToken);
                 return true;
             }
             return false;
@@ -51,6 +51,11 @@ namespace mbill_blazor_admin.Services.Impl
         public async Task<List<RoleModel>> GetRoles()
         {
             return await _client.GetAsync<List<RoleModel>>(CoreUrl.GetAllRoles);
+        }
+
+        public async Task<RoleDetailModel> GetRoleDetail(long id)
+        {
+            return await _client.GetAsync<RoleDetailModel>(string.Format(CoreUrl.GetRoleDetail, id));
         }
 
         #endregion

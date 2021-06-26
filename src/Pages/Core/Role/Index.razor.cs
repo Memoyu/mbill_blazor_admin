@@ -29,11 +29,12 @@ namespace mbill_blazor_admin.Pages.Core.Role
         private IEnumerable<RoleModel> _selectedRows;
         private bool _visible = false;
         private RoleModel _role;
-        [Inject] protected ICoreService coreService { get; set; }
+        [Inject] protected ICoreService CoreService { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            _roles = (await coreService.GetRoles()).ToArray();
+            _roles = (await CoreService.GetRoles()).ToArray();
             await base.OnInitializedAsync();
           
         }
@@ -50,6 +51,7 @@ namespace mbill_blazor_admin.Pages.Core.Role
         }
         private void Permission(long id)
         {
+            NavigationManager.NavigateTo($"/core/role/edit/{id}", true);
         }
 
         private void HandleOk(MouseEventArgs e)

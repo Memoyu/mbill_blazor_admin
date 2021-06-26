@@ -3,61 +3,57 @@
 @page "/core/role"
 
 <PageContainer Title="角色管理">
-    <Breadcrumb>
-        <Breadcrumb>
-            <BreadcrumbItem>主页</BreadcrumbItem>
-            <BreadcrumbItem>系统管理</BreadcrumbItem>
-            <BreadcrumbItem>角色管理</BreadcrumbItem>
-        </Breadcrumb>
-    </Breadcrumb>
+	<Breadcrumb>
+		<Breadcrumb>
+			<BreadcrumbItem>主页</BreadcrumbItem>
+			<BreadcrumbItem>系统管理</BreadcrumbItem>
+			<BreadcrumbItem>角色管理</BreadcrumbItem>
+		</Breadcrumb>
+	</Breadcrumb>
 
-    <ChildContent>
-        <Card>
-            <Table TItem="RoleModel"
-                   DataSource="@_roles"
-                   HidePagination="@true"
-                   @bind-SelectedRows="_selectedRows">
-                <AntDesign.Column Title="ID" @bind-Field="@context.Id" />
-                <AntDesign.Column Title="名称" @bind-Field="@context.Name" />
-                <AntDesign.Column Title="信息" @bind-Field="@context.Info" />
-                <AntDesign.Column Title="排序码" @bind-Field="@context.Sort" />
-                <AntDesign.Column Title="静态角色" Field="@context.IsStatic">
-                    <Switch Disabled="true" @bind-Value="@context.IsStatic"></Switch>
-                </AntDesign.Column>
-                <ActionColumn Title="操作">
-                    <Space>
-                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit(context)">编辑</Button></SpaceItem>
-                    </Space>
-
-                    <Space>
-                        <SpaceItem><Button OnClick="()=>Permission(context.Id)">权限</Button></SpaceItem>
-                    </Space>
-
-                    @if (!@context.IsStatic)
-                    {
-                        <Space>
-                            <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
-                        </Space>
-                    }
-                </ActionColumn>
-            </Table>
-        </Card>
-        <Modal Title="编辑角色"
-               Centered="true"
-               Visible="@_visible"
-               OnOk="@HandleOk"
-               OnCancel="@HandleCancel">
-            <Form Model="_role">
-                <FormItem Label="角色名称">
-                    <Input @bind-Value="@context.Name" />
-                </FormItem>
-                <FormItem Label="角色描述">
-                    <Input @bind-Value="@context.Info" />
-                </FormItem>
-                <FormItem Label="排序码">
-                    <Input @bind-Value="@context.Sort" />
-                </FormItem>
-            </Form>
-        </Modal>
-    </ChildContent>
+	<ChildContent>
+		<Card>
+			<Table TItem="RoleModel"
+				   DataSource="@_roles"
+				   HidePagination="@true"
+				   @bind-SelectedRows="_selectedRows">
+				<AntDesign.Column Title="ID" @bind-Field="@context.Id" />
+				<AntDesign.Column Title="名称" @bind-Field="@context.Name" />
+				<AntDesign.Column Title="信息" @bind-Field="@context.Info" />
+				<AntDesign.Column Title="排序码" @bind-Field="@context.Sort" />
+				<AntDesign.Column Title="静态角色" Field="@context.IsStatic">
+					<Checkbox Disabled="true" @bind-Checked="@context.IsStatic"></Checkbox>
+				</AntDesign.Column>
+				<ActionColumn Title="操作">
+					<Space>
+						<SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit(context)">编辑</Button></SpaceItem>
+						<SpaceItem><Button OnClick="()=>Permission(context.Id)">权限</Button></SpaceItem>
+                        @if (!@context.IsStatic)
+						{
+						    <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+						}
+					</Space>
+				</ActionColumn>
+			</Table>
+		</Card>
+		<Modal Title="编辑角色"
+			   Centered="true"
+			   Visible="@_visible"
+			   OnOk="@HandleOk"
+			   OnCancel="@HandleCancel">
+			<Form LabelCol="new ColLayoutParam { Span = 5 }"
+				  WrapperCol="new ColLayoutParam { Span = 16 }"
+				  Model="_role">
+				<FormItem Label="角色名称">
+					<Input @bind-Value="@context.Name" />
+				</FormItem>
+				<FormItem Label="角色描述">
+					<Input @bind-Value="@context.Info" />
+				</FormItem>
+				<FormItem Label="排序码">
+					<Input @bind-Value="@context.Sort" />
+				</FormItem>
+			</Form>
+		</Modal>
+	</ChildContent>
 </PageContainer>

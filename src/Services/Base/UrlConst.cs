@@ -6,6 +6,7 @@
         public const string Login = "account/login";
         public const string GetUserInfo = "account/user";
         public const string GetAllRoles = "admin/role/all";
+        public const string GetRoleDetail = "admin/role/{0}";
         public const string GetPermissionTrees = "admin/permission/tree";
         public const string GetLogs = "admin/log/pages";
     }

@@ -13,12 +13,12 @@ namespace mbill_blazor_admin.Pages.Core.Permission
     {
         private PermissionTreeModel[] _permissionTrees = { };
 
-        [Inject] protected ICoreService coreService { get; set; }
+        [Inject] protected ICoreService CoreService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            _permissionTrees = (await coreService.GetPremisssionTrees()).ToArray();
+            _permissionTrees = (await CoreService.GetPremisssionTrees()).ToArray();
         }
     }
 }

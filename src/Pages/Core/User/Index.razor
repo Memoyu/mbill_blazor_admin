@@ -13,7 +13,7 @@
     </Breadcrumb>
     <ChildContent>
         <Card>
-            <Form Model="page" Layout="inline">
+            <Form Model="_page" Layout="inline">
                 <FormItem Label="用户名">
                     <Input @bind-Value="@context.Username" />
                 </FormItem>
@@ -33,7 +33,7 @@
                 </FormItem>
 
                 <FormItem Label="角色">
-                    <Select DataSource="@_rolesInfo"
+                    <Select DataSource="@_roleInfos"
                             @bind-Value="@context.RoleId"
                             ValueName="@nameof(RoleModel.Id)"
                             LabelName="@nameof(RoleModel.Name)"
@@ -57,9 +57,9 @@
                    Loading="@_loading"
                    Total="_total"
                    ScrollX="1600"
-                   OnChange="onChange"
-                   @bind-PageIndex="page.Page"
-                   @bind-PageSize="page.Size">
+                   OnChange="OnChange"
+                   @bind-PageIndex="_page.Page"
+                   @bind-PageSize="_page.Size">
                 @*<Selection Key="@(context.Id.ToString())" />*@
                 <AntDesign.Column Title="ID" Width="80" Fixed="left" @bind-Field="@context.Id" Sortable />
                 <AntDesign.Column Title="昵称" Width="130" Fixed="left" @bind-Field="@context.Nickname" />

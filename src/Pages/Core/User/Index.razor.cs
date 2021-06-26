@@ -19,21 +19,21 @@ namespace mbill_blazor_admin.Pages.Core.User
             new SelectModel {Id = 1, Name="启用", NotAvailable = false  },
             new SelectModel {Id = 0, Name="禁用", NotAvailable = false  }
         };
-        private RoleModel[] _rolesInfo = { };
+        private RoleModel[] _roleInfos = { };
         private UserModel[] _users = { };
         private bool _loading = false;
-        private UserPageParams page = new UserPageParams();//new UserPageParams { Page = 0, Size = 10 };
+        private UserPageParams _page  = new UserPageParams();//new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
-        [Inject] protected ICoreService coreService { get; set; }
+        [Inject] protected ICoreService CoreService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            
-            //var roles = await coreService.GetRoles();
+
+            //var roles = await CoreService.GetRoles();
             //roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
-            //_rolesInfo = roles.ToArray();
+            //_roleInfos = roles.ToArray();
             await base.OnInitializedAsync();
-            
+
         }
 
         private void IsEnableHandleChange(SelectModel value)
@@ -41,12 +41,12 @@ namespace mbill_blazor_admin.Pages.Core.User
 
         }
 
-        private async Task onChange(QueryModel<UserModel> queryModel)
+        private async Task OnChange(QueryModel<UserModel> queryModel)
         {
             Console.WriteLine("分页改变");
             await GetUsers();
         }
-         
+
         private void Delete(long id)
         {
             _users = _users.Where(x => x.Id != id).ToArray();
@@ -60,7 +60,7 @@ namespace mbill_blazor_admin.Pages.Core.User
         private async Task GetUsers()
         {
             _loading = true;
-            var user = await coreService.GetUserPages(page);
+            var user = await CoreService.GetUserPages(_page);
             _users = user.Items.ToArray();
             _total = (int)user.Total;
             _loading = false;

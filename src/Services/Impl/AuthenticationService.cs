@@ -13,18 +13,18 @@ namespace mbill_blazor_admin.Services.Impl
         private readonly IJSRuntime _jsRuntime;
         private readonly NavigationManager _navigationManager;
         private readonly ICoreService _coreService;
-        private readonly AccountStorageService _accountStorageServic;
+        private readonly AccountStorageJsService _accountStorageJsServic;
 
-        public AuthenticationService(IJSRuntime jsRuntime, NavigationManager navigationManager, AccountStorageService accountStorageService, ICoreService coreService)
+        public AuthenticationService(IJSRuntime jsRuntime, NavigationManager navigationManager, AccountStorageJsService accountStorageJsService, ICoreService coreService)
         {
             _jsRuntime = jsRuntime;
             _navigationManager = navigationManager;
             _coreService = coreService;
-            _accountStorageServic = accountStorageService;
+            _accountStorageJsServic = accountStorageJsService;
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await _accountStorageServic.GetTokenAsync();
+            var token = await _accountStorageJsServic.GetTokenAsync();
             if (string.IsNullOrEmpty(token)) return GetUnAuthState();
 
             // 获取用户信息
@@ -49,7 +49,7 @@ namespace mbill_blazor_admin.Services.Impl
         /// <returns></returns>
         public async Task LogoutAsync()
         {
-            await _accountStorageServic.RemoveTokenAsync();
+            await _accountStorageJsServic.RemoveTokenAsync();
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", localStorageConst.UserInfo);
             NotifyAuthenticationStateChanged(Task.FromResult(GetUnAuthState(false)));
         }
