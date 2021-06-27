@@ -17,4 +17,9 @@
         public const string GetPages = "admin/user/pages";
     }
 
+    public static class BaseDataUrl
+    {
+        public const string GetAssetPages = "asset/pages";
+        public const string GetAssetParents = "asset/parents";
+    }
 }

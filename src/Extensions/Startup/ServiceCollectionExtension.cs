@@ -26,6 +26,7 @@ namespace mbill_blazor_admin.Extensions.Startup
         {
             services.AddScoped<AuthenticationStateProvider, AuthenticationService>();
             services.AddScoped<ICoreService, CoreService>();
+            services.AddScoped<IBaseDataService, BaseDataService>();
         }
 
     }

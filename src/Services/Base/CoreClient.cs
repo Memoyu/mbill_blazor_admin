@@ -67,17 +67,27 @@ namespace mbill_blazor_admin.Services.Base
         /// <param name="url">请求地址</param>
         /// <param name="isUnToken">是否需要token</param>
         /// <returns></returns>
-        public async Task<TResult> GetAsync<TResult>(string url,  bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : new()
+        public async Task<TResult> GetAsync<TResult>(string url, object content = null,  bool isHint = true, bool isUnToken = true, CancellationToken cancellationToken = default) where TResult : new()
         {
             try
             {
+                var bodyJson = content == null ? "" : JsonSerializer.Serialize(content);
                 if (isUnToken)
                 {
                     var token = await _accountStorageJsServic.GetTokenAsync();
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
                 }
-                HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+                HttpResponseMessage response = null;
+                using (var request = new HttpRequestMessage())
+                {
+                    request.Method = HttpMethod.Get;
+                    request.RequestUri = new Uri($"{_httpClient.BaseAddress}{url}");
+                    request.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
+                    response = await _httpClient.SendAsync(request);
+                }
+
+                
                 if (response != null)
                 {
                     if (response.IsSuccessStatusCode)

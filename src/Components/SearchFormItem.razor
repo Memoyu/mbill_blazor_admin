@@ -1,0 +1,19 @@
+﻿@namespace mbill_blazor_admin.Components
+
+<Row class ="@_prefixCls">
+	@if (!string.IsNullOrEmpty(Label))
+	{
+	 <AntDesign.Col Class=@($"{_prefixCls}-label")>
+	  <label>@(Label)</label>
+	 </AntDesign.Col>
+	}
+ <AntDesign.Col Class=@($"{_prefixCls}-control")>
+  <div class=@($"{_prefixCls}-control-input")>
+   <div class=@($"{_prefixCls}-control-input-content")>
+	<CascadingValue Value="this" Name="FormItem" IsFixed="@true">
+					@ChildContent
+	</CascadingValue>
+   </div>
+  </div>
+ </AntDesign.Col>
+</Row>

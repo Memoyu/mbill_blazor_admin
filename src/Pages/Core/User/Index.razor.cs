@@ -28,7 +28,7 @@ namespace mbill_blazor_admin.Pages.Core.User
         protected override async Task OnInitializedAsync()
         {
 
-            //var roles = await CoreService.GetRoles();
+            //var roles = await BaseDataService.GetRoles();
             //roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
             //_roleInfos = roles.ToArray();
             await base.OnInitializedAsync();

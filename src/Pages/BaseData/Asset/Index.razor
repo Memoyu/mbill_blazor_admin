@@ -1,4 +1,5 @@
-﻿@namespace mbill_blazor_admin.Pages.BaseData.Asset
+﻿@using mbill_blazor_admin.Models.BaseData.Output
+@namespace mbill_blazor_admin.Pages.BaseData.Asset
 @page "/basedata/asset"
 
 <PageContainer Title="资产管理">
@@ -11,8 +12,113 @@
     </Breadcrumb>
 
     <ChildContent>
-        <Card>
+   <Card>
+       @*<Row Gutter="16">
+           <AntDesign.Col Class="gutter-row" Span="6">
+               <Row>
+                   <Col>
+                       <label>资产分类名称</label>
+                   </Col>
+                   <Col>
+                       <Input @bind-Value="@_page.AssetName"/>
+                   </Col>
+               </Row>
+               
+           </AntDesign.Col>
 
+           <AntDesign.Col Class="gutter-row" Span="6">
+               <label>所属父类</label>
+               <Select Mode="multiple"
+                       Placeholder="Please select"
+                       DataSource="@_assetParents"
+                       @bind-Values="@_selectedValues"
+                       LabelName="@nameof(AssetModel.Name)"
+                       ValueName="@nameof(AssetModel.Id)"
+                       TItemValue="long"
+                       TItem="AssetModel"
+                       OnSelectedItemsChanged="OnSelectedItemsChangedHandler"
+                       EnableSearch>
+               </Select>
+           </AntDesign.Col>
+
+           <AntDesign.Col Class="gutter-row" Span="6">
+               <Space>
+                   <SpaceItem>
+                       <Button Type="@ButtonType.Primary" OnClick ="EnterInquireAsset">
+                           查询
+                       </Button>
+                   </SpaceItem>
+                   <SpaceItem>
+                       <Button Type="@ButtonType.Primary" OnClick ="ResetInquireAsset">
+                           重置
+                       </Button>
+                   </SpaceItem>
+               </Space>
+           </AntDesign.Col>
+       </Row>*@
+       <SearchForm OnSearch="HandleOnSearch" OnRest="HandleOnReset">
+           <SearchFormItem Label="资产分类名称">
+               <Input @bind-Value="@_page.AssetName"/>
+           </SearchFormItem>
+           <SearchFormItem Label="所属父类">
+               <Select Mode="multiple"
+                       DataSource="@_assetParents"
+                       @bind-Values="@_page.ParentIds"
+                       LabelName="@nameof(AssetModel.Name)"
+                       ValueName="@nameof(AssetModel.Id)"
+                       TItemValue="long"
+                       TItem="AssetModel"
+                       Style="min-width:160px"
+                       EnableSearch>
+               </Select>
+           </SearchFormItem>
+       </SearchForm>
+
+   </Card>
+        <Card>
+            <Table
+                   TItem="AssetModel"
+                   DataSource="@_assets"
+                   Loading="@_loading"
+                   Total="_total"
+                   OnChange="OnChange"
+                   @bind-PageIndex="_page.Page"
+                   @bind-PageSize="_page.Size">
+                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="图标" @bind-Field="@context.IconUrl">
+                    @if (!string.IsNullOrWhiteSpace(context.IconUrl))
+                    {
+                        <Image Width="30px" Height="30px" Src="@context.IconUrl"/>
+                    }
+                </AntDesign.Column>
+                <AntDesign.Column Title="资产分类名称" @bind-Field="@context.Name" />
+                <AntDesign.Column Title="类型" @bind-Field="@context.TypeName" />
+                <AntDesign.Column Title="归属分类" @bind-Field="@context.ParentName">
+                    @if (!string.IsNullOrWhiteSpace(context.ParentName))
+                    {
+                        <Tag Color="blue">@context.ParentName</Tag>
+                    }
+                </AntDesign.Column>
+                <ActionColumn Title="操作">
+                    <Space>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
+                    </Space>
+                    <Space>
+                        <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                    </Space>
+                </ActionColumn>
+            </Table>
+            @*<br />
+                <h5>已选:</h5>
+                @if (_selectedRows != null && _selectedRows.Any())
+                {
+                    <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+
+                    @foreach (var selected in _selectedRows)
+                    {
+                        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
+                    }
+                }*@
         </Card>
     </ChildContent>
 </PageContainer>
