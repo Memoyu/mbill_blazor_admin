@@ -22,5 +22,10 @@ namespace mbill_blazor_admin.Models.BaseData.Output
         public string ParentName { get; set; }
 
         public string TypeName { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }

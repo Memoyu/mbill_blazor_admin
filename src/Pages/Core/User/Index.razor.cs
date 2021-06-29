@@ -12,11 +12,11 @@ namespace mbill_blazor_admin.Pages.Core.User
 {
     public partial class Index
     {
-        private SelectModel[] _isEnableStatus =
+        private SelectIntModel[] _isEnableStatus =
         {
-            new SelectModel {Id = -1, Name="全部", NotAvailable = false  },
-            new SelectModel {Id = 1, Name="启用", NotAvailable = false  },
-            new SelectModel {Id = 0, Name="禁用", NotAvailable = false  }
+            new SelectIntModel {Id = -1, Name="全部", NotAvailable = false  },
+            new SelectIntModel {Id = 1, Name="启用", NotAvailable = false  },
+            new SelectIntModel {Id = 0, Name="禁用", NotAvailable = false  }
         };
         private RoleModel[] _roleInfos = { };
         private UserModel[] _users = { };
@@ -35,7 +35,7 @@ namespace mbill_blazor_admin.Pages.Core.User
 
         }
 
-        private void IsEnableHandleChange(SelectModel value)
+        private void IsEnableHandleChange(SelectIntModel value)
         {
 
         }

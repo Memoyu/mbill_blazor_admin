@@ -10,9 +10,9 @@ namespace mbill_blazor_admin.Models.BaseData.Input
     {
         public string AssetName { get; set; }
 
-        public IEnumerable<long> ParentIds { get; set; } = new List<long>();
+        public string ParentIds { get; set; }
 
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
 
         public DateTime? CreateStartTime { get; set; }
 

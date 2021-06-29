@@ -23,4 +23,24 @@ namespace mbill_blazor_admin.Common.Const
         /// </summary>
         public static int User = 3;
     }
+
+    /// <summary>
+    /// 选取器
+    /// </summary>
+    public class Switcher
+    {
+        public static string CategoryType(string type) => type switch
+        {
+            "expend" => "支出",
+            "income" => "收入",
+            _ => "",
+        };
+
+        public static string AssetType(string type) => type switch
+        {
+            "deposit" => "储蓄",
+            "debt" => "债务",
+            _ => "",
+        };
+    }
 }

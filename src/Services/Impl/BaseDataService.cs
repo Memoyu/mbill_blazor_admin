@@ -18,8 +18,8 @@ namespace mbill_blazor_admin.Services.Impl
         }
         public async Task<PagedDto<AssetModel>> GetAssetPages(AssetPageParams pagingDto)
         {
-            // var url = CoreClient.GetSpliceUrlByObj(BaseDataUrl.GetAssetPages, pagingDto);
-            return await _client.GetAsync<PagedDto<AssetModel>>(BaseDataUrl.GetAssetPages, pagingDto);
+            var url = CoreClient.GetSpliceUrlByObj(BaseDataUrl.GetAssetPages, pagingDto);
+            return await _client.GetAsync<PagedDto<AssetModel>>(url);
         }
 
         public async Task<List<AssetModel>> GetAssetParents()
