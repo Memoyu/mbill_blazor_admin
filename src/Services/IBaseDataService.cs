@@ -22,5 +22,18 @@ namespace mbill_blazor_admin.Services
         /// </summary>
         /// <returns></returns>
         Task<List<AssetModel>> GetAssetParents();
+
+        /// <summary>
+        /// 获取账单分类分页信息
+        /// </summary>
+        /// <param name="pagingDto"></param>
+        /// <returns></returns>
+        Task<PagedDto<CategoryModel>> GetCategoryPages(CategoryPageParams pagingDto);
+
+        /// <summary>
+        /// 获取父类账单分类集合
+        /// </summary>
+        /// <returns></returns>
+        Task<List<CategoryModel>> GetCategoryParents();
     }
 }

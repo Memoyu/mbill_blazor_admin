@@ -21,5 +21,8 @@
     {
         public const string GetAssetPages = "asset/pages";
         public const string GetAssetParents = "asset/parents";
+
+        public const string GetCategoryPages = "category/pages";
+        public const string GetCategoryParents = "category/parents";
     }
 }

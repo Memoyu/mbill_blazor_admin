@@ -1,5 +1,7 @@
 ﻿@namespace mbill_blazor_admin.Pages.BaseData.Category
 @page "/basedata/category"
+@using mbill_blazor_admin.Models.Base
+@using mbill_blazor_admin.Models.BaseData.Output
 
 <PageContainer Title="分类管理">
     <Breadcrumb>
@@ -11,8 +13,70 @@
     </Breadcrumb>
 
     <ChildContent>
+          <Card>
+            <SearchForm OnSearch="HandleOnSearch" OnRest="HandleOnReset">
+                <SearchFormItem Label="账单分类名称">
+                    <Input @bind-Value="@_page.CategoryName" />
+                </SearchFormItem>
+                <SearchFormItem Label="所属父类">
+                    <Select Mode="multiple"
+                            DataSource="@_categoryParents"
+                            @bind-Values="@_selectedValues"
+                            LabelName="@nameof(CategoryModel.Name)"
+                            ValueName="@nameof(CategoryModel.Id)"
+                            TItemValue="long"
+                            TItem="CategoryModel"
+                            Style="min-width:160px"
+                            OnSelectedItemsChanged="HandleOnSelectedItemsChanged"
+                            EnableSearch>
+                    </Select>
+                </SearchFormItem>
+                <SearchFormItem Label="类型">
+                    <Select DataSource="@_types"
+                            @bind-Value="@_page.Type"
+                            ValueName="@nameof(SelectStringModel.Id)"
+                            LabelName="@nameof(SelectStringModel.Name)"
+                            Style="width:120px">
+                    </Select>
+                </SearchFormItem>
+                <SearchFormItem Label="创建时间">
+                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange"/>
+                </SearchFormItem>
+            </SearchForm>
+        </Card>
         <Card>
-
+            <Table TItem="CategoryModel"
+                   DataSource="@_categories"
+                   Loading="@_loading"
+                   Total="_total"
+                   OnChange="OnChange"
+                   @bind-PageIndex="_page.Page"
+                   @bind-PageSize="_page.Size">
+                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="图标" @bind-Field="@context.IconUrl">
+                    @if (!string.IsNullOrWhiteSpace(context.IconUrl))
+                            {
+                    <Image Width="30px" Height="30px" Src="@context.IconUrl" />
+                    }
+                </AntDesign.Column>
+                <AntDesign.Column Title="账单分类名称" @bind-Field="@context.Name" />
+                <AntDesign.Column Title="类型" @bind-Field="@context.TypeName" />
+                <AntDesign.Column Title="归属分类" @bind-Field="@context.ParentName">
+                    @if (!string.IsNullOrWhiteSpace(context.ParentName))
+                            {
+                    <Tag Color="blue">@context.ParentName</Tag>
+                    }
+                </AntDesign.Column>
+                 <AntDesign.Column Title="创建时间" @bind-Field=@(context.CreateTime) />
+                <ActionColumn Title="操作">
+                    <Space>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
+                    </Space>
+                    <Space>
+                        <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                    </Space>
+                </ActionColumn>
+            </Table>
         </Card>
     </ChildContent>
 </PageContainer>

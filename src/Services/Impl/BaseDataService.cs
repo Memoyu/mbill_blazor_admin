@@ -26,5 +26,16 @@ namespace mbill_blazor_admin.Services.Impl
         {
             return await _client.GetAsync<List<AssetModel>>(BaseDataUrl.GetAssetParents);
         }
+
+        public async Task<PagedDto<CategoryModel>> GetCategoryPages(CategoryPageParams pagingDto)
+        {
+            var url = CoreClient.GetSpliceUrlByObj(BaseDataUrl.GetCategoryPages, pagingDto);
+            return await _client.GetAsync<PagedDto<CategoryModel>>(url);
+        }
+
+        public async Task<List<CategoryModel>> GetCategoryParents()
+        {
+            return await _client.GetAsync<List<CategoryModel>>(BaseDataUrl.GetCategoryParents);
+        }
     }
 }
