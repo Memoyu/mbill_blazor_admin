@@ -45,11 +45,16 @@
             </SearchForm>
         </Card>
         <Card>
+            <Button Type="@ButtonType.Primary" OnClick="HandleOnAddAsset">
+				新增
+			</Button>
+        </Card>  
+        <Card>
             <Table TItem="AssetModel"
                    DataSource="@_assets"
                    Loading="@_loading"
                    Total="_total"
-                   OnChange="OnChange"
+                   OnChange="HandelOnOnChange"
                    @bind-PageIndex="_page.Page"
                    @bind-PageSize="_page.Size">
                 <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
@@ -70,10 +75,10 @@
                  <AntDesign.Column Title="创建时间" @bind-Field=@(context.CreateTime) />
                 <ActionColumn Title="操作">
                     <Space>
-                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit()">编辑</Button></SpaceItem>
                     </Space>
                     <Space>
-                        <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.Id)">删除</Button></SpaceItem>
                     </Space>
                 </ActionColumn>
             </Table>

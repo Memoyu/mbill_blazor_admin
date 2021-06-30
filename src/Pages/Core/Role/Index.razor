@@ -28,11 +28,11 @@
                     <Space>
 						@if(!@context.IsAdministrator)
 						{
-                            <SpaceItem><Button Type="primary" Ghost OnClick="() => Edit(context)">编辑</Button></SpaceItem>
-                            <SpaceItem><Button OnClick="() => Permission(context.Id)">权限</Button></SpaceItem>
+                            <SpaceItem><Button Type="primary" Ghost OnClick="() => HandelOnEdit(context)">编辑</Button></SpaceItem>
+                            <SpaceItem><Button OnClick="() => HandelOnEditPermission(context.Id)">权限</Button></SpaceItem>
                             @if (!@context.IsStatic)
                             {
-                                <SpaceItem><Button Danger OnClick="() => Delete(context.Id)">删除</Button></SpaceItem>
+                                <SpaceItem><Button Danger OnClick="() => HandelOnDelete(context.Id)">删除</Button></SpaceItem>
                             }
 						}
                     </Space>
@@ -42,8 +42,8 @@
 		<Modal Title="编辑角色"
 			   Centered="true"
 			   Visible="@_visible"
-			   OnOk="@HandleOk"
-			   OnCancel="@HandleCancel">
+			   OnOk="@HandelOnOk"
+			   OnCancel="@HandleOnCancel">
 			<Form LabelCol="new ColLayoutParam { Span = 5 }"
 				  WrapperCol="new ColLayoutParam { Span = 16 }"
 				  Model="_role">

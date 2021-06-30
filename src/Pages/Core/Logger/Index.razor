@@ -1,0 +1,72 @@
+﻿@using mbill_blazor_admin.Models.Base
+@using mbill_blazor_admin.Models.Core.Output
+@namespace mbill_blazor_admin.Pages.Core.Logger
+@page "/core/log"
+
+<PageContainer Title="日志管理">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>主页</BreadcrumbItem>
+            <BreadcrumbItem>系统管理</BreadcrumbItem>
+            <BreadcrumbItem>日志管理</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+
+    <ChildContent>
+        <Card>
+            <SearchForm OnSearch="HandleOnSearch" OnRest="HandleOnReset">
+                <SearchFormItem Label="用户名">
+                    <Input @bind-Value="@_page.Username" />
+                </SearchFormItem>
+
+                <SearchFormItem Label="用户">
+                    <Select DataSource="@_users"
+                            @bind-Value="@_page.UserId"
+                            ValueName="@nameof(SelectStringModel.Id)"
+                            LabelName="@nameof(SelectStringModel.Name)"
+                            Style="width:120px">
+                    </Select>
+                </SearchFormItem>
+
+                <SearchFormItem Label="请求方式">
+                     <Select DataSource="@_methods"
+                            @bind-Value="@_page.Method"
+                            ValueName="@nameof(SelectStringModel.Id)"
+                            LabelName="@nameof(SelectStringModel.Name)"
+                            Style="width:120px">
+                    </Select>
+                </SearchFormItem>
+
+                <SearchFormItem Label="状态码">
+                    <Select DataSource="@_statusCodes"
+                            @bind-Value="@_page.StatusCode"
+                            ValueName="@nameof(SelectStringModel.Id)"
+                            LabelName="@nameof(SelectStringModel.Name)"
+                            Style="width:120px">
+                    </Select>
+                </SearchFormItem>
+
+                <SearchFormItem Label="创建时间">
+                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange" />
+                </SearchFormItem>
+            </SearchForm>
+        </Card>
+        <Card>
+            <Table TItem="LogModel"
+                   Loading="@_loading"
+                   Total="_total"
+                   DataSource="@_logs"
+                   OnChange="HandelOnChange"
+                   @bind-PageIndex="_page.Page"
+                   @bind-PageSize="_page.Size">
+                <AntDesign.Column Title="ID" @bind-Field="@context.Id" />
+                <AntDesign.Column Title="请求方式" @bind-Field="@context.Method" />
+                <AntDesign.Column Title="信息" @bind-Field="@context.Message" />
+                <AntDesign.Column Title="Url" @bind-Field="@context.Path" />
+                <AntDesign.Column Title="响应状态" @bind-Field="@context.StatusCode" />
+                <AntDesign.Column Title="用户名" @bind-Field="@context.Username" />
+                <AntDesign.Column Title="创建时间" @bind-Field="@context.CreateTime" />
+            </Table>
+        </Card>
+    </ChildContent>
+</PageContainer>

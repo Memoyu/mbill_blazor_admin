@@ -46,18 +46,20 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
             _page = new AssetPageParams();
             await GetAssets();
         }
-
-        private void Edit()
+        private async Task HandleOnAddAsset()
+        {
+        }
+        private void HandelOnEdit()
         {
             throw new NotImplementedException();
         }
 
-        private void Delete(long id)
+        private void HandelOnDelete(long id)
         {
             throw new NotImplementedException();
         }
 
-        private async Task OnChange(QueryModel<AssetModel> model)
+        private async Task HandelOnOnChange(QueryModel<AssetModel> model)
         {
             await GetAssets();
         }

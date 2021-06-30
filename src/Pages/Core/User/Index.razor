@@ -13,51 +13,51 @@
     </Breadcrumb>
     <ChildContent>
         <Card>
-            <Form Model="_page" Layout="inline">
-                <FormItem Label="用户名">
-                    <Input @bind-Value="@context.Username" />
-                </FormItem>
+            <SearchForm OnSearch="HandleOnSearch" OnRest="HandleOnReset">
+                <SearchFormItem Label="用户名">
+                    <Input @bind-Value="@_page.Username" />
+                </SearchFormItem>
 
-                <FormItem Label="昵称">
-                    <Input @bind-Value="@context.Nickname" />
-                </FormItem>
+                <SearchFormItem Label="昵称">
+                    <Input @bind-Value="@_page.Nickname" />
+                </SearchFormItem>
 
-                <FormItem Label="是否启用">
+                <SearchFormItem Label="是否启用">
                     <Select DataSource="@_isEnableStatus"
-                            @bind-Value="@context.IsEnable"
+                            @bind-Value="@_page.IsEnable"
                             ValueName="@nameof(SelectIntModel.Id)"
                             LabelName="@nameof(SelectIntModel.Name)"
                             Style="width:120px"
-                            OnSelectedItemChanged="IsEnableHandleChange">
+                            OnSelectedItemChanged="HandelOnIsEnableChange">
                     </Select>
-                </FormItem>
+                </SearchFormItem>
 
-                <FormItem Label="角色">
+                <SearchFormItem Label="角色">
                     <Select DataSource="@_roleInfos"
-                            @bind-Value="@context.RoleId"
+                            @bind-Value="@_page.RoleId"
                             ValueName="@nameof(RoleModel.Id)"
                             LabelName="@nameof(RoleModel.Name)"
                             Style="width:120px">
                     </Select>
-                </FormItem>
+                </SearchFormItem>
 
-                <FormItem Label="创建时间">
-                    <DatePicker @bind-Value="@context.CreateTime" />
-                </FormItem>
-
-                <Button Type="@ButtonType.Primary" OnClick ="EnterInquireRole">
-                    查询
-                </Button>
-            </Form>
+                 <SearchFormItem Label="创建时间">
+                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange"/>
+                </SearchFormItem>
+            </SearchForm>
         </Card>
         <Card>
-            <Table
-                   TItem="UserModel"
+            <Button Type="@ButtonType.Primary" OnClick="HandleOnAddUser">
+                新增
+            </Button>
+        </Card>
+        <Card>
+            <Table TItem="UserModel"
                    DataSource="@_users"
                    Loading="@_loading"
                    Total="_total"
                    ScrollX="1600"
-                   OnChange="OnChange"
+                   OnChange="HandelOnOnChange"
                    @bind-PageIndex="_page.Page"
                    @bind-PageSize="_page.Size">
                 @*<Selection Key="@(context.Id.ToString())" />*@
@@ -70,8 +70,8 @@
                 <AntDesign.Column Title="地址" @bind-Field="@context.Address" />
                 <AntDesign.Column Title="角色" @bind-Field="@context.Roles">
                     @foreach (var role in context.Roles)
-                    {
-                        <Tag Color="blue">@role.Name</Tag>
+                            {
+                    <Tag Color="blue">@role.Name</Tag>
                     }
                 </AntDesign.Column>
                 <AntDesign.Column Title="最后一次登陆时间" @bind-Field="@context.LastLoginTime" />
@@ -80,10 +80,10 @@
                 </AntDesign.Column>
                 <ActionColumn Title="操作">
                     <Space>
-                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>Edit()">编辑</Button></SpaceItem>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit()">编辑</Button></SpaceItem>
                     </Space>
                     <Space>
-                        <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">删除</Button></SpaceItem>
+                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.Id)">删除</Button></SpaceItem>
                     </Space>
                 </ActionColumn>
             </Table>
@@ -91,12 +91,12 @@
                 <h5>已选:</h5>
                 @if (_selectedRows != null && _selectedRows.Any())
                 {
-                    <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+                <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
 
-                    @foreach (var selected in _selectedRows)
-                    {
-                        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
-                    }
+                @foreach (var selected in _selectedRows)
+                {
+                <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id-@selected.Nickname</Tag>
+                }
                 }*@
         </Card>
     </ChildContent>

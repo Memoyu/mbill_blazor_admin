@@ -45,28 +45,28 @@ namespace mbill_blazor_admin.Pages.Core.Role
 
         }
 
-        private void Delete(long id)
+        private void HandelOnDelete(long id)
         {
             _roles = _roles.Where(x => x.Id != id).ToArray();
         }
 
-        private void Edit(RoleModel role)
+        private void HandelOnEdit(RoleModel role)
         {
             _visible = true;
             _role = role;
         }
-        private void Permission(long id)
+        private void HandelOnEditPermission(long id)
         {
             NavigationManager.NavigateTo($"/core/role/edit/{id}", true);
         }
 
-        private void HandleOk(MouseEventArgs e)
+        private void HandelOnOk(MouseEventArgs e)
         {
             Console.WriteLine(e);
             _visible = false;
         }
 
-        private void HandleCancel(MouseEventArgs e)
+        private void HandleOnCancel(MouseEventArgs e)
         {
             Console.WriteLine(e);
             _visible = false;

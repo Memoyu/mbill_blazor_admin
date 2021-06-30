@@ -47,17 +47,21 @@ namespace mbill_blazor_admin.Pages.BaseData.Category
             await GetCategories();
         }
 
-        private void Edit()
+        private async Task HandleOnAddCategory()
+        {
+        }
+
+        private void HandelOnEdit()
         {
             throw new NotImplementedException();
         }
 
-        private void Delete(long id)
+        private void HandelOnDelete(long id)
         {
             throw new NotImplementedException();
         }
 
-        private async Task OnChange(QueryModel<CategoryModel> model)
+        private async Task HandelOnChange(QueryModel<CategoryModel> model)
         {
             await GetCategories();
         }

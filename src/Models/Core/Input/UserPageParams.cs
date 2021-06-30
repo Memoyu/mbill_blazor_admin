@@ -16,6 +16,8 @@ namespace mbill_blazor_admin.Models.Core.Input
 
         public long RoleId { get; set; } = -1;
 
-        public DateTime? CreateTime { get; set; }
+        public DateTime? CreateStartTime { get; set; }
+
+        public DateTime? CreateEndTime { get; set; }
     }
 }

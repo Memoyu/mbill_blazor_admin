@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using mbill_blazor_admin.Models.Core.Input;
 using mbill_blazor_admin.Models.Core.Output;
+using AntDesign;
 
 namespace mbill_blazor_admin.Pages.Core.User
 {
@@ -23,36 +24,58 @@ namespace mbill_blazor_admin.Pages.Core.User
         private bool _loading = false;
         private UserPageParams _page  = new UserPageParams();//new UserPageParams { Page = 0, Size = 10 };
         private int _total = 0;
+
         [Inject] protected ICoreService CoreService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-
-            //var roles = await BaseDataService.GetRoles();
-            //roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
-            //_roleInfos = roles.ToArray();
             await base.OnInitializedAsync();
+            var roles = await CoreService.GetRoles();
+            roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
+            _roleInfos = roles.ToArray();
 
         }
 
-        private void IsEnableHandleChange(SelectIntModel value)
+        private void HandelOnIsEnableChange(SelectIntModel value)
         {
 
         }
 
-        private async Task OnChange(QueryModel<UserModel> queryModel)
+        private async Task HandleOnSearch()
+        {
+            await GetUsers();
+        }
+
+        private async Task HandleOnReset()
+        {
+            _page = new UserPageParams();
+            await GetUsers();
+        }
+
+        private async Task HandleOnAddUser()
+        {
+        }
+
+        private async Task HandelOnOnChange(QueryModel<UserModel> queryModel)
         {
             Console.WriteLine("分页改变");
             await GetUsers();
         }
 
-        private void Delete(long id)
+        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs args)
+        {
+            var date = args.Dates;
+            _page.CreateStartTime = date[0]?.Date;
+            _page.CreateEndTime = date[1]?.Date.AddDays(1).AddSeconds(-1);
+        }
+
+        private void HandelOnDelete(long id)
         {
             _users = _users.Where(x => x.Id != id).ToArray();
             _total = _users.Length;
         }
 
-        private void Edit()
+        private void HandelOnEdit()
         {
         }
 
@@ -63,10 +86,6 @@ namespace mbill_blazor_admin.Pages.Core.User
             _users = user.Items.ToArray();
             _total = (int)user.Total;
             _loading = false;
-        }
-        private void EnterInquireRole()
-        {
-            Console.WriteLine("查询");
         }
     }
 }
