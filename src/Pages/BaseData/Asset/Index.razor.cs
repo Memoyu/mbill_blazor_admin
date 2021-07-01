@@ -9,6 +9,7 @@ using mbill_blazor_admin.Models.BaseData.Input;
 using mbill_blazor_admin.Models.BaseData.Output;
 using mbill_blazor_admin.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace mbill_blazor_admin.Pages.BaseData.Asset
 {
@@ -17,6 +18,7 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
         private AssetPageParams _page = new AssetPageParams();
         private bool _loading = false;
         private int _total = 0;
+        private bool _editModalVisible = false;
 
         private SelectStringModel[] _types =
         {
@@ -27,6 +29,7 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
         private IEnumerable<long> _selectedValues = new List<long>();
         private AssetModel[] _assetParents = { };
         private AssetModel[] _assets = { };
+        private AssetModel _asset;
 
         [Inject] protected IBaseDataService BaseDataService { get; set; }
 
@@ -51,7 +54,17 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
         }
         private void HandelOnEdit()
         {
-            throw new NotImplementedException();
+            _editModalVisible = true;
+        }
+
+        private void HandelOnEditOk(MouseEventArgs e)
+        {
+            _editModalVisible = false;
+        }
+
+        private void HandleOnEditCancel(MouseEventArgs e)
+        {
+            _editModalVisible = false;
         }
 
         private void HandelOnDelete(long id)

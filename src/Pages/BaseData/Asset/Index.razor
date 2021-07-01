@@ -18,7 +18,7 @@
                 <SearchFormItem Label="资产分类名称">
                     <Input @bind-Value="@_page.AssetName" />
                 </SearchFormItem>
-                <SearchFormItem Label="所属父类">
+                <SearchFormItem Label="归属分类">
                     <Select Mode="multiple"
                             DataSource="@_assetParents"
                             @bind-Values="@_selectedValues"
@@ -84,5 +84,33 @@
                 </ActionColumn>
             </Table>
         </Card>
+         <Modal Title="编辑资产分类"
+               Centered="true"
+               Visible="@_editModalVisible"
+               OnOk="@HandelOnEditOk"
+               OnCancel="@HandleOnEditCancel">
+            <Form LabelCol="new ColLayoutParam { Span = 5 }"
+                  WrapperCol="new ColLayoutParam { Span = 16 }"
+                  Model="_asset">
+                <FormItem Label="资产分类名称">
+                    <Input @bind-Value="@context.Name" />
+                </FormItem>
+                <FormItem Label="类型">
+                    <Select DataSource="@_types"
+                            @bind-Value="@context.Type"
+                            ValueName="@nameof(SelectStringModel.Id)"
+                            LabelName="@nameof(SelectStringModel.Name)">
+                    </Select>
+                </FormItem>
+                <FormItem Label="归属分类">
+                     <Select DataSource="@_assetParents"
+                            @bind-Value="@context.ParentId"
+                            LabelName="@nameof(AssetModel.Name)"
+                            ValueName="@nameof(AssetModel.Id)"
+                            EnableSearch>
+                    </Select>
+                </FormItem>
+            </Form>
+        </Modal>
     </ChildContent>
 </PageContainer>
