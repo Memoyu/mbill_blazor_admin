@@ -41,17 +41,18 @@
                     </Select>
                 </SearchFormItem>
 
-                 <SearchFormItem Label="创建时间">
-                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange"/>
+                <SearchFormItem Label="创建时间">
+                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange" />
                 </SearchFormItem>
             </SearchForm>
         </Card>
+
         <Card>
-            <Button Type="@ButtonType.Primary" OnClick="HandleOnAddUser">
-                新增
-            </Button>
-        </Card>
-        <Card>
+            <Card>
+                <Button Type="@ButtonType.Primary" OnClick="HandleOnAddUser">
+                    新增
+                </Button>
+            </Card>
             <Table TItem="UserModel"
                    DataSource="@_users"
                    Loading="@_loading"

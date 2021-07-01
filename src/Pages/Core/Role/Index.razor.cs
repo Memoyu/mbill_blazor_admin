@@ -34,6 +34,7 @@ namespace mbill_blazor_admin.Pages.Core.Role
 
         protected override async Task OnInitializedAsync()
         {
+            await base.OnInitializedAsync();
             var roles = (await CoreService.GetRoles()).Select(r =>
             {
                 if (r.Id == StaticRole.Administrator)
@@ -41,8 +42,11 @@ namespace mbill_blazor_admin.Pages.Core.Role
                 return r;
             }).ToArray();
             _roles = roles;
-            await base.OnInitializedAsync();
 
+        }
+
+        private async Task HandleOnAddRole()
+        {
         }
 
         private void HandelOnDelete(long id)

@@ -13,7 +13,7 @@
     </Breadcrumb>
 
     <ChildContent>
-          <Card>
+        <Card>
             <SearchForm OnSearch="HandleOnSearch" OnRest="HandleOnReset">
                 <SearchFormItem Label="账单分类名称">
                     <Input @bind-Value="@_page.CategoryName" />
@@ -40,16 +40,17 @@
                     </Select>
                 </SearchFormItem>
                 <SearchFormItem Label="创建时间">
-                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange"/>
+                    <RangePicker TValue="DateTime?[]" OnChange="HandleOnTimeRangeChange" />
                 </SearchFormItem>
             </SearchForm>
         </Card>
+
         <Card>
-            <Button Type="@ButtonType.Primary" OnClick="HandleOnAddCategory">
-				新增
-			</Button>
-        </Card>  
-        <Card>
+            <Card>
+                <Button Type="@ButtonType.Primary" OnClick="HandleOnAddCategory">
+                    新增
+                </Button>
+            </Card>
             <Table TItem="CategoryModel"
                    DataSource="@_categories"
                    Loading="@_loading"
@@ -72,7 +73,7 @@
                     <Tag Color="blue">@context.ParentName</Tag>
                     }
                 </AntDesign.Column>
-                 <AntDesign.Column Title="创建时间" @bind-Field=@(context.CreateTime) />
+                <AntDesign.Column Title="创建时间" @bind-Field=@(context.CreateTime) />
                 <ActionColumn Title="操作">
                     <Space>
                         <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit()">编辑</Button></SpaceItem>
