@@ -34,6 +34,7 @@
 
                 <SearchFormItem Label="角色">
                     <Select DataSource="@_roleInfos"
+                            AllowClear = "@true" 
                             @bind-Value="@_page.RoleId"
                             ValueName="@nameof(RoleModel.Id)"
                             LabelName="@nameof(RoleModel.Name)"

@@ -31,9 +31,7 @@ namespace mbill_blazor_admin.Pages.Core.User
         {
             await base.OnInitializedAsync();
             var roles = await CoreService.GetRoles();
-            roles.Insert(0, new RoleModel { Id = -1, Name = "全部" });
             _roleInfos = roles.ToArray();
-
         }
 
         private void HandelOnIsEnableChange(SelectIntModel value)

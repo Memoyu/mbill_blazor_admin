@@ -20,6 +20,7 @@
                 </SearchFormItem>
                 <SearchFormItem Label="归属分类">
                     <Select Mode="multiple"
+                            AllowClear = "@true" 
                             DataSource="@_assetParents"
                             @bind-Values="@_selectedValues"
                             LabelName="@nameof(AssetModel.Name)"
@@ -33,6 +34,7 @@
                 </SearchFormItem>
                 <SearchFormItem Label="类型">
                     <Select DataSource="@_types"
+                            AllowClear = "@true" 
                             @bind-Value="@_page.Type"
                             ValueName="@nameof(SelectStringModel.Id)"
                             LabelName="@nameof(SelectStringModel.Name)"
@@ -95,11 +97,24 @@
                 @if (context.ParentId > 0)
                 {
                     <FormItem Label="图标">
-                        <Image Style="margin: 0 20px" Width="30px" Height="30px" Src="@context.IconUrl" />
-                       <Upload Action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                Name="files"
-                                OnSingleCompleted="HandelOnSingleCompleted">
-                            <Button Icon="upload"></Button>
+                        <Upload Action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                Name="avatar"
+                                Class="avatar-uploader"
+                                ListType="picture-card"
+                                ShowUploadList="false"
+                                BeforeUpload="BeforeUpload"
+                                OnChange="HandleChange">
+                            @if (!string.IsNullOrWhiteSpace(context.IconUrl))
+                            {
+                                <img src="@context.IconUrl" alt="avatar" style="width: 100%" />
+                            }
+                            else
+                            {
+                                <div>
+                                    <Icon Spin="_uploadLoading" Type="@(_uploadLoading?"Loading":"plus")" ></Icon>
+                                    <div className="ant-upload-text">上传图标</div>
+                                </div>
+                            }
                         </Upload>
                     </FormItem>
                 }

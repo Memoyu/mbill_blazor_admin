@@ -17,12 +17,12 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
     {
         private AssetPageParams _page = new AssetPageParams();
         private bool _loading = false;
+        private bool _uploadLoading = false;
         private int _total = 0;
         private bool _editModalVisible = false;
 
         private SelectStringModel[] _types =
         {
-            new SelectStringModel {Id = "", Name="全部", NotAvailable = false  },
             new SelectStringModel {Id = "deposit", Name="储蓄", NotAvailable = false  },
             new SelectStringModel {Id = "debt", Name="债务", NotAvailable = false  }
         };
@@ -32,6 +32,7 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
         private AssetModel _asset;
 
         [Inject] protected IBaseDataService BaseDataService { get; set; }
+        [Inject] protected MessageService MessageService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -60,13 +61,30 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
             _editModalVisible = true;
         }
 
-        void HandelOnSingleCompleted(UploadInfo fileinfo)
+        bool BeforeUpload(UploadFileItem file)
         {
+            var isJpgOrPng = file.Type == "image/jpeg" || file.Type == "image/png";
+            if (!isJpgOrPng)
+            {
+                MessageService.Error("You can only upload JPG/PNG file!");
+            }
+            var isLt2M = file.Size / 1024 / 1024 < 2;
+            if (!isLt2M)
+            {
+                MessageService.Error("Image must smaller than 2MB!");
+            }
+            return isJpgOrPng && isLt2M;
+        }
+
+        void HandleChange(UploadInfo fileinfo)
+        {
+            _uploadLoading = fileinfo.File.State == UploadState.Uploading;
+
             if (fileinfo.File.State == UploadState.Success)
             {
-                //var result = fileinfo.File.GetResponse<ResponseModel>();
-                //fileinfo.File.Url = result.url;
+                _asset.IconUrl = fileinfo.File.ObjectURL;
             }
+            InvokeAsync(StateHasChanged);
         }
 
         private void HandelOnEditOk(MouseEventArgs e)
@@ -91,7 +109,8 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
 
         private void HandleOnSelectedItemsChanged(IEnumerable<AssetModel> models)
         {
-            _page.ParentIds = string.Join(",", _selectedValues);
+            if (_selectedValues != null && _selectedValues.Any())
+                _page.ParentIds = string.Join(",", _selectedValues);
         }
 
         private void HandleOnTimeRangeChange(DateRangeChangedEventArgs args)
