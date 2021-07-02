@@ -49,12 +49,24 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
             _page = new AssetPageParams();
             await GetAssets();
         }
+
         private async Task HandleOnAddAsset()
         {
         }
-        private void HandelOnEdit()
+
+        private void HandelOnEdit(AssetModel model)
         {
+            _asset = model;
             _editModalVisible = true;
+        }
+
+        void HandelOnSingleCompleted(UploadInfo fileinfo)
+        {
+            if (fileinfo.File.State == UploadState.Success)
+            {
+                //var result = fileinfo.File.GetResponse<ResponseModel>();
+                //fileinfo.File.Url = result.url;
+            }
         }
 
         private void HandelOnEditOk(MouseEventArgs e)

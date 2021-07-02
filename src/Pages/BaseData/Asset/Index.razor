@@ -76,7 +76,7 @@
                 <AntDesign.Column Title="创建时间" @bind-Field=@(context.CreateTime) />
                 <ActionColumn Title="操作">
                     <Space>
-                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit()">编辑</Button></SpaceItem>
+                        <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit(context)">编辑</Button></SpaceItem>
                     </Space>
                     <Space>
                         <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.Id)">删除</Button></SpaceItem>
@@ -84,7 +84,7 @@
                 </ActionColumn>
             </Table>
         </Card>
-         <Modal Title="编辑资产分类"
+        <Modal Title="编辑资产分类"
                Centered="true"
                Visible="@_editModalVisible"
                OnOk="@HandelOnEditOk"
@@ -92,6 +92,18 @@
             <Form LabelCol="new ColLayoutParam { Span = 5 }"
                   WrapperCol="new ColLayoutParam { Span = 16 }"
                   Model="_asset">
+                @if (context.ParentId > 0)
+                {
+                    <FormItem Label="图标">
+                        <Image Style="margin: 0 20px" Width="30px" Height="30px" Src="@context.IconUrl" />
+                       <Upload Action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                Name="files"
+                                OnSingleCompleted="HandelOnSingleCompleted">
+                            <Button Icon="upload"></Button>
+                        </Upload>
+                    </FormItem>
+                }
+
                 <FormItem Label="资产分类名称">
                     <Input @bind-Value="@context.Name" />
                 </FormItem>
@@ -102,14 +114,17 @@
                             LabelName="@nameof(SelectStringModel.Name)">
                     </Select>
                 </FormItem>
-                <FormItem Label="归属分类">
-                     <Select DataSource="@_assetParents"
-                            @bind-Value="@context.ParentId"
-                            LabelName="@nameof(AssetModel.Name)"
-                            ValueName="@nameof(AssetModel.Id)"
-                            EnableSearch>
-                    </Select>
-                </FormItem>
+                @if (context.ParentId > 0) 
+                {
+                    <FormItem Label="归属分类">
+                        <Select DataSource="@_assetParents"
+                                @bind-Value="@context.ParentId"
+                                LabelName="@nameof(AssetModel.Name)"
+                                ValueName="@nameof(AssetModel.Id)"
+                                EnableSearch>
+                        </Select>
+                    </FormItem>
+                }
             </Form>
         </Modal>
     </ChildContent>
