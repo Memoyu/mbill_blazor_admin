@@ -25,7 +25,7 @@
 
 ## 相关项目
 
-✨[采用.NET5实现的后端服务 - Memoyu/mbill_service](https://github.com/Memoyu/mbill_service)
+✨[采用.NET6实现的后端服务 - Memoyu/mbill_service](https://github.com/Memoyu/mbill_service)
 
 ✨[采用uni-app实现的小程序前端 - Memoyu/mbill_wechat_app](https://github.com/Memoyu/mbill_wechat_app)
 
