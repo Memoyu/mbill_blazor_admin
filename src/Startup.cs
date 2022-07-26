@@ -67,7 +67,7 @@ namespace mbill_blazor_admin
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //  app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

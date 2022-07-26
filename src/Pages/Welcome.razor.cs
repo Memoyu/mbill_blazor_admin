@@ -33,25 +33,6 @@ namespace mbill_blazor_admin.Pages
         new {time = "2019-07", count = 220}
         };
 
-        readonly GroupedColumnLineConfig config1 = new GroupedColumnLineConfig
-        {
-            Title = new Title
-            {
-                Visible = true,
-                Text = "分组柱+折线混合图",
-                AlignTo = "middle"
-            },
-            Description = new Description
-            {
-                Visible = true,
-                Text = "分组柱+折线混合图表",
-                AlignTo = "middle"
-            },
-            XField = "time",
-            YField = new[] { "value", "count" },
-            ColumnGroupField = "type"
-        };
-
         #endregion 示例1
     }
 }
