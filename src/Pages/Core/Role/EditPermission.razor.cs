@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AntDesign;
-using mbill_blazor_admin.Models.Core.Input;
-using mbill_blazor_admin.Models.Core.Output;
-using mbill_blazor_admin.Services;
-using mbill_blazor_admin.Services.Impl;
+using Mbill.Admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Output;
+using Mbill.Admin.Services;
+using Mbill.Admin.Services.Impl;
 using Microsoft.AspNetCore.Components;
 
-namespace mbill_blazor_admin.Pages.Core.Role
+namespace Mbill.Admin.Pages.Core.Role
 {
     public partial class EditPermission
     {

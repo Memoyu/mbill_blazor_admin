@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.BaseData.Output
+namespace Mbill.Admin.Models.BaseData.Output
 {
     public class CategoryModel
     {

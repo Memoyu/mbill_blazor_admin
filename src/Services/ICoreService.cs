@@ -1,13 +1,13 @@
-﻿using mbill_blazor_admin.Models.Base.Page;
-using mbill_blazor_admin.Models.Core;
+﻿using Mbill.Admin.Models.Base.Page;
+using Mbill.Admin.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core.Input;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Output;
 
-namespace mbill_blazor_admin.Services
+namespace Mbill.Admin.Services
 {
     public interface ICoreService
     {

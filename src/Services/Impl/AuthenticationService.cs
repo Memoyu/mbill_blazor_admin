@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Services.Base;
+using Mbill.Admin.Services.Base;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System.Text.Json;
 
-namespace mbill_blazor_admin.Services.Impl
+namespace Mbill.Admin.Services.Impl
 {
     public class AuthenticationService : AuthenticationStateProvider
     {

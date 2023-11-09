@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace mbill_blazor_admin.Extensions.Validation
+namespace Mbill.Admin.Extensions.Validation
 {
     public class CoreRequired : ValidationAttribute
     {

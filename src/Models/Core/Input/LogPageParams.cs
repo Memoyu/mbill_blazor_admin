@@ -1,7 +1,7 @@
-﻿using mbill_blazor_admin.Models.Base.Page;
+﻿using Mbill.Admin.Models.Base.Page;
 using System;
 
-namespace mbill_blazor_admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input
 {
     public class LogPageParams : PagingDto
     {

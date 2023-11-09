@@ -1,10 +1,10 @@
-﻿using mbill_blazor_admin.Models.Base.Page;
+﻿using Mbill.Admin.Models.Base.Page;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input
 {
     public class UserPageParams : PagingDto
     {

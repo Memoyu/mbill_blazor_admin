@@ -1,4 +1,4 @@
-﻿namespace mbill_blazor_admin.Services.Base
+﻿namespace Mbill.Admin.Services.Base
 {
 
     public static class CoreUrl

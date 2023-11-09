@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.Core.Output
+namespace Mbill.Admin.Models.Core.Output
 {
     public class PermissionTreeModel
     {

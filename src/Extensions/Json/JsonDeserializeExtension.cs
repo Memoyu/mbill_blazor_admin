@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace mbill_blazor_admin.Extensions.Json
+namespace Mbill.Admin.Extensions.Json
 {
     public static class JsonDeserializeExtension
     {

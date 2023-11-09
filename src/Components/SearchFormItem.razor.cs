@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
-namespace mbill_blazor_admin.Components
+namespace Mbill.Admin.Components
 {
     public partial class SearchFormItem
     {

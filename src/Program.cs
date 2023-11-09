@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace mbill_blazor_admin
+namespace Mbill.Admin
 {
     public class Program
     {

@@ -1,8 +1,8 @@
-﻿using mbill_blazor_admin.Services;
+﻿using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
-using mbill_blazor_admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Input;
 
-namespace mbill_blazor_admin.Pages.Core.Account
+namespace Mbill.Admin.Pages.Core.Account
 {
     public partial class Login
     {

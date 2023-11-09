@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using AntDesign;
-using mbill_blazor_admin.Services.Impl;
+using Mbill.Admin.Services.Impl;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using mbill_blazor_admin.Services;
+using Mbill.Admin.Services;
 using AntDesign.ProLayout;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Output;
 
-namespace mbill_blazor_admin.Components
+namespace Mbill.Admin.Components
 {
     public partial class RightContent
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Pages
+namespace Mbill.Admin.Pages
 {
     public partial class Welcome
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace mbill_blazor_admin.Models.Base.Page
+namespace Mbill.Admin.Models.Base.Page
 {
     public class PagedDto<T>
     {

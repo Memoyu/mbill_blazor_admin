@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace mbill_blazor_admin.Models.Base.Page
+namespace Mbill.Admin.Models.Base.Page
 {
 
     /// <summary>

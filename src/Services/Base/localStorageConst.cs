@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Services.Base
+namespace Mbill.Admin.Services.Base
 {
     public class localStorageConst
     {

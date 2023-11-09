@@ -6,7 +6,7 @@ using AntDesign;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace mbill_blazor_admin.Components
+namespace Mbill.Admin.Components
 {
     public partial class SearchForm : AntDomComponentBase
     {

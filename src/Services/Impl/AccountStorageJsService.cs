@@ -1,4 +1,4 @@
-﻿using mbill_blazor_admin.Services.Base;
+﻿using Mbill.Admin.Services.Base;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Services.Impl
+namespace Mbill.Admin.Services.Impl
 {
     public class AccountStorageJsService
     {

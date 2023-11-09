@@ -1,9 +1,9 @@
-﻿using mbill_blazor_admin.Services;
+﻿using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Output;
 
-namespace mbill_blazor_admin.Pages.Core.Permission
+namespace Mbill.Admin.Pages.Core.Permission
 {
     public partial class Index
     {

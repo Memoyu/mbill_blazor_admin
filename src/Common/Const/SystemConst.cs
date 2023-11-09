@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Common.Const
+namespace Mbill.Admin.Common.Const
 {
     /// <summary>
     /// 默认角色

@@ -11,11 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AntDesign.ProLayout;
-using mbill_blazor_admin.Common.Tools;
-using mbill_blazor_admin.Extensions.Startup;
-using mbill_blazor_admin.Services.Impl;
+using Mbill.Admin.Common.Tools;
+using Mbill.Admin.Extensions.Startup;
+using Mbill.Admin.Services.Impl;
 
-namespace mbill_blazor_admin
+namespace Mbill.Admin
 {
     public class Startup
     {

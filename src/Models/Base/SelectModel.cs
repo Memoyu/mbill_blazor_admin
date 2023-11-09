@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.Base
+namespace Mbill.Admin.Models.Base
 {
     public class SelectIntModel
     {

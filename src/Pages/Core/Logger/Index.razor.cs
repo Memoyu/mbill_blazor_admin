@@ -1,16 +1,16 @@
 ﻿using AntDesign;
 using AntDesign.TableModels;
-using mbill_blazor_admin.Models.Base;
-using mbill_blazor_admin.Models.Core.Input;
-using mbill_blazor_admin.Models.Core.Output;
-using mbill_blazor_admin.Services;
+using Mbill.Admin.Models.Base;
+using Mbill.Admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Output;
+using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Pages.Core.Logger
+namespace Mbill.Admin.Pages.Core.Logger
 {
     public partial class Index
     {
@@ -61,7 +61,7 @@ namespace mbill_blazor_admin.Pages.Core.Logger
             await GetLogs();
         }
 
-        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs args)
+        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
         {
             var date = args.Dates;
             _page.CreateStartTime = date[0]?.Date;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace mbill_blazor_admin.Models.Core.Output
+namespace Mbill.Admin.Models.Core.Output
 {
     public class RoleDetailModel
     {

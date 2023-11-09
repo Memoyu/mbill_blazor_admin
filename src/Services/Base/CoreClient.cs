@@ -1,7 +1,7 @@
 ﻿using AntDesign;
-using mbill_blazor_admin.Common.Tools;
-using mbill_blazor_admin.Models.Base;
-using mbill_blazor_admin.Services.Impl;
+using Mbill.Admin.Common.Tools;
+using Mbill.Admin.Models.Base;
+using Mbill.Admin.Services.Impl;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -14,9 +14,9 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using mbill_blazor_admin.Extensions.Json;
+using Mbill.Admin.Extensions.Json;
 
-namespace mbill_blazor_admin.Services.Base
+namespace Mbill.Admin.Services.Base
 {
     public class CoreClient
     {

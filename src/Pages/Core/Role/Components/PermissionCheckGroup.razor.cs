@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using AntDesign;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Output;
 using Microsoft.AspNetCore.Components;
 
-namespace mbill_blazor_admin.Pages.Core.Role
+namespace Mbill.Admin.Pages.Core.Role
 {
 
     public partial class PermissionCheckGroup

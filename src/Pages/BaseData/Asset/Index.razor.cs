@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AntDesign;
 using AntDesign.TableModels;
-using mbill_blazor_admin.Models.Base;
-using mbill_blazor_admin.Models.BaseData.Input;
-using mbill_blazor_admin.Models.BaseData.Output;
-using mbill_blazor_admin.Services;
+using Mbill.Admin.Models.Base;
+using Mbill.Admin.Models.BaseData.Input;
+using Mbill.Admin.Models.BaseData.Output;
+using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace mbill_blazor_admin.Pages.BaseData.Asset
+namespace Mbill.Admin.Pages.BaseData.Asset
 {
     public partial class Index
     {
@@ -113,11 +113,11 @@ namespace mbill_blazor_admin.Pages.BaseData.Asset
                 _page.ParentIds = string.Join(",", _selectedValues);
         }
 
-        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs args)
+        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
         {
-            var date = args.Dates;
-            _page.CreateStartTime = date[0]?.Date;
-            _page.CreateEndTime = date[1]?.Date.AddDays(1).AddSeconds(-1);
+            var dates = args.Dates;
+            _page.CreateStartTime = dates[0]?.Date;
+            _page.CreateEndTime = dates[1]?.Date.AddDays(1).AddSeconds(-1);
         }
 
         private async Task GetAssets()

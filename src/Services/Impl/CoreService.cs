@@ -1,12 +1,12 @@
 ﻿using AntDesign;
-using mbill_blazor_admin.Models.Base.Page;
-using mbill_blazor_admin.Services.Base;
+using Mbill.Admin.Models.Base.Page;
+using Mbill.Admin.Services.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core.Input;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Output;
 
-namespace mbill_blazor_admin.Services.Impl
+namespace Mbill.Admin.Services.Impl
 {
     public class CoreService : ICoreService
     {

@@ -1,4 +1,4 @@
-﻿namespace mbill_blazor_admin.Models.Base
+﻿namespace Mbill.Admin.Models.Base
 {
     /// <summary>
     /// 服务层响应实体

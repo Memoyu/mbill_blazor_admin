@@ -1,12 +1,12 @@
-﻿using mbill_blazor_admin.Services.Base;
-using mbill_blazor_admin.Services;
-using mbill_blazor_admin.Services.Impl;
+﻿using Mbill.Admin.Services.Base;
+using Mbill.Admin.Services;
+using Mbill.Admin.Services.Impl;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
 
-namespace mbill_blazor_admin.Extensions.Startup
+namespace Mbill.Admin.Extensions.Startup
 {
     public static class ServiceCollectionExtension
     {

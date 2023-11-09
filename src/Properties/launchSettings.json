@@ -1,10 +1,10 @@
 {
   "profiles": {
-    "mbill_blazor_admin": {
+    "Mbill.Admin": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:10087",
+      "applicationUrl": "http://localhost:9087",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

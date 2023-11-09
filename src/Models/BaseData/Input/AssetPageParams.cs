@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Base.Page;
+using Mbill.Admin.Models.Base.Page;
 
-namespace mbill_blazor_admin.Models.BaseData.Input
+namespace Mbill.Admin.Models.BaseData.Input
 {
     public class AssetPageParams : PagingDto
     {

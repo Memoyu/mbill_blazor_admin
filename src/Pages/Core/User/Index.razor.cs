@@ -1,15 +1,15 @@
 ﻿using AntDesign.TableModels;
-using mbill_blazor_admin.Models.Base;
-using mbill_blazor_admin.Services;
+using Mbill.Admin.Models.Base;
+using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Core.Input;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Models.Core.Input;
+using Mbill.Admin.Models.Core.Output;
 using AntDesign;
 
-namespace mbill_blazor_admin.Pages.Core.User
+namespace Mbill.Admin.Pages.Core.User
 {
     public partial class Index
     {
@@ -34,11 +34,6 @@ namespace mbill_blazor_admin.Pages.Core.User
             _roleInfos = roles.ToArray();
         }
 
-        private void HandelOnIsEnableChange(SelectIntModel value)
-        {
-
-        }
-
         private async Task HandleOnSearch()
         {
             await GetUsers();
@@ -60,7 +55,7 @@ namespace mbill_blazor_admin.Pages.Core.User
             await GetUsers();
         }
 
-        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs args)
+        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
         {
             var date = args.Dates;
             _page.CreateStartTime = date[0]?.Date;

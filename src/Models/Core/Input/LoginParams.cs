@@ -1,7 +1,7 @@
-﻿using mbill_blazor_admin.Extensions.Validation;
+﻿using Mbill.Admin.Extensions.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace mbill_blazor_admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input
 {
     public class LoginParams
     {

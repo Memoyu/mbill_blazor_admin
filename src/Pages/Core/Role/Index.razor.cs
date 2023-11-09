@@ -1,7 +1,7 @@
 ﻿/**************************************************************************  
 *   =================================
 *   CLR版本  ：4.0.30319.42000
-*   命名空间 ：mbill_blazor_admin.Pages.Core.Role
+*   命名空间 ：Mbill.Admin.Pages.Core.Role
 *   文件名称 ：Index.cs
 *   =================================
 *   创 建 者 ：Memoyu
@@ -10,17 +10,17 @@
 *   功能描述 ：
 ***************************************************************************/
 using AntDesign;
-using mbill_blazor_admin.Services;
+using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Common.Const;
-using mbill_blazor_admin.Models.Core.Output;
+using Mbill.Admin.Common.Const;
+using Mbill.Admin.Models.Core.Output;
 
-namespace mbill_blazor_admin.Pages.Core.Role
+namespace Mbill.Admin.Pages.Core.Role
 {
     public partial class Index
     {

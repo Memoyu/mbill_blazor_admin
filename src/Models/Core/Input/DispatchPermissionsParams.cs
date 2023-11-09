@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mbill_blazor_admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input
 {
     public class DispatchPermissionsParams
     {

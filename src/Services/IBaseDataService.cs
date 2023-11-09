@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using mbill_blazor_admin.Models.Base.Page;
-using mbill_blazor_admin.Models.BaseData.Input;
-using mbill_blazor_admin.Models.BaseData.Output;
+using Mbill.Admin.Models.Base.Page;
+using Mbill.Admin.Models.BaseData.Input;
+using Mbill.Admin.Models.BaseData.Output;
 
-namespace mbill_blazor_admin.Services
+namespace Mbill.Admin.Services
 {
     public interface IBaseDataService
     {
