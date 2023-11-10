@@ -1,20 +1,19 @@
 ﻿using Mbill.Admin.Models.Base.Page;
 using System;
 
-namespace Mbill.Admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input;
+
+public class LogPageParams : PagingDto
 {
-    public class LogPageParams : PagingDto
-    {
-        public string Method { get; set; } = "";
+    public string Method { get; set; } = "";
 
-        public string Username { get; set; }
+    public string Username { get; set; }
 
-        public string UserId { get; set; } = "";
+    public string UserBId { get; set; } = "";
 
-        public string StatusCode { get; set; } = "";
+    public string StatusCode { get; set; } = "";
 
-        public DateTime? CreateStartTime { get; set; }
+    public DateTime? CreateStartTime { get; set; }
 
-        public DateTime? CreateEndTime { get; set; }
-    }
+    public DateTime? CreateEndTime { get; set; }
 }

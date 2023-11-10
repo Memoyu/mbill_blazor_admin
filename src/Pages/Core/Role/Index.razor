@@ -22,7 +22,7 @@
                    DataSource="@_roles"
                    HidePagination="@true"
                    @bind-SelectedRows="_selectedRows">
-                <AntDesign.Column Title="ID" @bind-Field="@context.Id" />
+                <AntDesign.Column Title="ID" @bind-Field="@context.BId" />
                 <AntDesign.Column Title="名称" @bind-Field="@context.Name" />
                 <AntDesign.Column Title="信息" @bind-Field="@context.Info" />
                 <AntDesign.Column Title="排序码" @bind-Field="@context.Sort" />
@@ -34,10 +34,10 @@
                         @if (!@context.IsAdministrator)
                                 {
                         <SpaceItem><Button Type="primary" Ghost OnClick="() => HandelOnEdit(context)">编辑</Button></SpaceItem>
-                        <SpaceItem><Button OnClick="() => HandelOnEditPermission(context.Id)">权限</Button></SpaceItem>
+                        <SpaceItem><Button OnClick="() => HandelOnEditPermission(context.BId)">权限</Button></SpaceItem>
                         @if (!@context.IsStatic)
                         {
-                            <SpaceItem><Button Danger OnClick="() => HandelOnDelete(context.Id)">删除</Button></SpaceItem>
+                            <SpaceItem><Button Danger OnClick="() => HandelOnDelete(context.BId)">删除</Button></SpaceItem>
                         }
                         }
                     </Space>

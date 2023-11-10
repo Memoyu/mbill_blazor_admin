@@ -24,7 +24,7 @@
                             DataSource="@_assetParents"
                             @bind-Values="@_selectedValues"
                             LabelName="@nameof(AssetModel.Name)"
-                            ValueName="@nameof(AssetModel.Id)"
+                            ValueName="@nameof(AssetModel.BId)"
                             TItemValue="long"
                             TItem="AssetModel"
                             Style="min-width:160px"
@@ -60,7 +60,7 @@
                    OnChange="HandelOnOnChange"
                    @bind-PageIndex="_page.Page"
                    @bind-PageSize="_page.Size">
-                <AntDesign.Column Title="ID" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="ID" @bind-Field="@context.BId" Sortable />
                 <AntDesign.Column Title="图标" @bind-Field="@context.IconUrl">
                     @if (!string.IsNullOrWhiteSpace(context.IconUrl))
                             {
@@ -81,7 +81,7 @@
                         <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit(context)">编辑</Button></SpaceItem>
                     </Space>
                     <Space>
-                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.Id)">删除</Button></SpaceItem>
+                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.BId)">删除</Button></SpaceItem>
                     </Space>
                 </ActionColumn>
             </Table>
@@ -94,7 +94,7 @@
             <Form LabelCol="new ColLayoutParam { Span = 5 }"
                   WrapperCol="new ColLayoutParam { Span = 16 }"
                   Model="_asset">
-                @if (context.ParentId > 0)
+                @if (context.ParentBId > 0)
                 {
                     <FormItem Label="图标">
                         <Upload Action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -129,13 +129,13 @@
                             LabelName="@nameof(SelectStringModel.Name)">
                     </Select>
                 </FormItem>
-                @if (context.ParentId > 0) 
+                @if (context.ParentBId > 0) 
                 {
                     <FormItem Label="归属分类">
                         <Select DataSource="@_assetParents"
-                                @bind-Value="@context.ParentId"
+                                @bind-Value="@context.ParentBId"
                                 LabelName="@nameof(AssetModel.Name)"
-                                ValueName="@nameof(AssetModel.Id)"
+                                ValueName="@nameof(AssetModel.BId)"
                                 EnableSearch>
                         </Select>
                     </FormItem>

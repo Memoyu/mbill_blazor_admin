@@ -8,57 +8,56 @@ using Mbill.Admin.Services;
 using Mbill.Admin.Services.Impl;
 using Microsoft.AspNetCore.Components;
 
-namespace Mbill.Admin.Pages.Core.Role
+namespace Mbill.Admin.Pages.Core.Role;
+
+public partial class EditPermission
 {
-    public partial class EditPermission
+    [Parameter] public long Id { get; set; }
+
+    private PermissionCardModel[] _permissionCards = { };
+
+    private PermissionTreeModel[] _permissionTrees = { };
+    [Inject] protected ICoreService CoreService { get; set; }
+
+    [Inject] public CommonJsService CommonJsService { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
-        [Parameter] public long Id { get; set; }
-
-        private PermissionCardModel[] _permissionCards = { };
-
-        private PermissionTreeModel[] _permissionTrees = { };
-        [Inject] protected ICoreService CoreService { get; set; }
-
-        [Inject] public CommonJsService CommonJsService { get; set; }
-
-        protected override async Task OnInitializedAsync()
+        _permissionTrees = (await CoreService.GetPremisssionTrees()).ToArray();
+        var roleDetail = await CoreService.GetRoleDetail(Id);
+        _permissionCards = _permissionTrees.Select(pt => new PermissionCardModel
         {
-            _permissionTrees = (await CoreService.GetPremisssionTrees()).ToArray();
-            var roleDetail = await CoreService.GetRoleDetail(Id);
-            _permissionCards = _permissionTrees.Select(pt => new PermissionCardModel
+            Title = pt.Name,
+            PermissionChecks = pt.Children.Select(ptc => new PermissionCheckModel
             {
-                Title = pt.Name,
-                PermissionChecks = pt.Children.Select(ptc => new PermissionCheckModel
-                {
-                    Id = ptc.Id,
-                    Title = ptc.Name,
-                    Checked = roleDetail.RolePermissions.Any(rp => rp.PermissionId == ptc.Id)
-                }).ToArray()
-            }).ToArray();
-            await base.OnInitializedAsync();
-        }
+                BId = ptc.BId,
+                Title = ptc.Name,
+                Checked = roleDetail.RolePermissions.Any(rp => rp.PermissionBId == ptc.BId)
+            }).ToArray()
+        }).ToArray();
+        await base.OnInitializedAsync();
+    }
 
-        private async Task Save()
+    private async Task Save()
+    {
+        var checkedPermissionIds = new List<long>();
+        _permissionCards.ForEach(pc =>
         {
-            var checkedPermissionIds = new List<long>();
-            _permissionCards.ForEach(pc =>
-            {
-                foreach (var item in pc.PermissionChecks)
-                    if (item.Checked)
-                        checkedPermissionIds.Add(item.Id);
-            });
+            foreach (var item in pc.PermissionChecks)
+                if (item.Checked)
+                    checkedPermissionIds.Add(item.BId);
+        });
 
-            var model = new DispatchPermissionsParams
-            {
-                RoleId = Id,
-                PermissionIds = checkedPermissionIds
-            };
-
-            var res = await CoreService.EditRolePermission(model);
-        }
-
-        private async Task GoBack()
+        var model = new DispatchPermissionsParams
         {
-        }
+            RoleBId = Id,
+            PermissionBIds = checkedPermissionIds
+        };
+
+        var res = await CoreService.EditRolePermission(model);
+    }
+
+    private async Task GoBack()
+    {
     }
 }

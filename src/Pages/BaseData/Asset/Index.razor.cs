@@ -11,122 +11,121 @@ using Mbill.Admin.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Mbill.Admin.Pages.BaseData.Asset
+namespace Mbill.Admin.Pages.BaseData.Asset;
+
+public partial class Index
 {
-    public partial class Index
+    private AssetPageParams _page = new AssetPageParams();
+    private bool _loading = false;
+    private bool _uploadLoading = false;
+    private int _total = 0;
+    private bool _editModalVisible = false;
+
+    private SelectStringModel[] _types =
     {
-        private AssetPageParams _page = new AssetPageParams();
-        private bool _loading = false;
-        private bool _uploadLoading = false;
-        private int _total = 0;
-        private bool _editModalVisible = false;
+        new SelectStringModel {Id = "deposit", Name="储蓄", NotAvailable = false  },
+        new SelectStringModel {Id = "debt", Name="债务", NotAvailable = false  }
+    };
+    private IEnumerable<long> _selectedValues = new List<long>();
+    private AssetModel[] _assetParents = { };
+    private AssetModel[] _assets = { };
+    private AssetModel _asset;
 
-        private SelectStringModel[] _types =
+    [Inject] protected IBaseDataService BaseDataService { get; set; }
+    [Inject] protected MessageService MessageService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _assetParents = (await BaseDataService.GetAssetParents()).ToArray();
+    }
+
+    private async Task HandleOnSearch()
+    {
+        await GetAssets();
+    }
+
+    private async Task HandleOnReset()
+    {
+        _page = new AssetPageParams();
+        await GetAssets();
+    }
+
+    private async Task HandleOnAddAsset()
+    {
+    }
+
+    private void HandelOnEdit(AssetModel model)
+    {
+        _asset = model;
+        _editModalVisible = true;
+    }
+
+    bool BeforeUpload(UploadFileItem file)
+    {
+        var isJpgOrPng = file.Type == "image/jpeg" || file.Type == "image/png";
+        if (!isJpgOrPng)
         {
-            new SelectStringModel {Id = "deposit", Name="储蓄", NotAvailable = false  },
-            new SelectStringModel {Id = "debt", Name="债务", NotAvailable = false  }
-        };
-        private IEnumerable<long> _selectedValues = new List<long>();
-        private AssetModel[] _assetParents = { };
-        private AssetModel[] _assets = { };
-        private AssetModel _asset;
-
-        [Inject] protected IBaseDataService BaseDataService { get; set; }
-        [Inject] protected MessageService MessageService { get; set; }
-
-        protected override async Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-            _assetParents = (await BaseDataService.GetAssetParents()).ToArray();
+            MessageService.Error("You can only upload JPG/PNG file!");
         }
-
-        private async Task HandleOnSearch()
+        var isLt2M = file.Size / 1024 / 1024 < 2;
+        if (!isLt2M)
         {
-            await GetAssets();
+            MessageService.Error("Image must smaller than 2MB!");
         }
+        return isJpgOrPng && isLt2M;
+    }
 
-        private async Task HandleOnReset()
+    void HandleChange(UploadInfo fileinfo)
+    {
+        _uploadLoading = fileinfo.File.State == UploadState.Uploading;
+
+        if (fileinfo.File.State == UploadState.Success)
         {
-            _page = new AssetPageParams();
-            await GetAssets();
+            _asset.IconUrl = fileinfo.File.ObjectURL;
         }
+        InvokeAsync(StateHasChanged);
+    }
 
-        private async Task HandleOnAddAsset()
-        {
-        }
+    private void HandelOnEditOk(MouseEventArgs e)
+    {
+        _editModalVisible = false;
+    }
 
-        private void HandelOnEdit(AssetModel model)
-        {
-            _asset = model;
-            _editModalVisible = true;
-        }
+    private void HandleOnEditCancel(MouseEventArgs e)
+    {
+        _editModalVisible = false;
+    }
 
-        bool BeforeUpload(UploadFileItem file)
-        {
-            var isJpgOrPng = file.Type == "image/jpeg" || file.Type == "image/png";
-            if (!isJpgOrPng)
-            {
-                MessageService.Error("You can only upload JPG/PNG file!");
-            }
-            var isLt2M = file.Size / 1024 / 1024 < 2;
-            if (!isLt2M)
-            {
-                MessageService.Error("Image must smaller than 2MB!");
-            }
-            return isJpgOrPng && isLt2M;
-        }
+    private void HandelOnDelete(long id)
+    {
+        throw new NotImplementedException();
+    }
 
-        void HandleChange(UploadInfo fileinfo)
-        {
-            _uploadLoading = fileinfo.File.State == UploadState.Uploading;
+    private async Task HandelOnOnChange(QueryModel<AssetModel> model)
+    {
+        await GetAssets();
+    }
 
-            if (fileinfo.File.State == UploadState.Success)
-            {
-                _asset.IconUrl = fileinfo.File.ObjectURL;
-            }
-            InvokeAsync(StateHasChanged);
-        }
+    private void HandleOnSelectedItemsChanged(IEnumerable<AssetModel> models)
+    {
+        if (_selectedValues != null && _selectedValues.Any())
+            _page.ParentBIds = string.Join(",", _selectedValues);
+    }
 
-        private void HandelOnEditOk(MouseEventArgs e)
-        {
-            _editModalVisible = false;
-        }
+    private void HandleOnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
+    {
+        var dates = args.Dates;
+        _page.CreateStartTime = dates[0]?.Date;
+        _page.CreateEndTime = dates[1]?.Date.AddDays(1).AddSeconds(-1);
+    }
 
-        private void HandleOnEditCancel(MouseEventArgs e)
-        {
-            _editModalVisible = false;
-        }
-
-        private void HandelOnDelete(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task HandelOnOnChange(QueryModel<AssetModel> model)
-        {
-            await GetAssets();
-        }
-
-        private void HandleOnSelectedItemsChanged(IEnumerable<AssetModel> models)
-        {
-            if (_selectedValues != null && _selectedValues.Any())
-                _page.ParentIds = string.Join(",", _selectedValues);
-        }
-
-        private void HandleOnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
-        {
-            var dates = args.Dates;
-            _page.CreateStartTime = dates[0]?.Date;
-            _page.CreateEndTime = dates[1]?.Date.AddDays(1).AddSeconds(-1);
-        }
-
-        private async Task GetAssets()
-        {
-            _loading = true;
-            var assets = await BaseDataService.GetAssetPages(_page);
-            _assets = assets.Items.ToArray();
-            _total = (int)assets.Total;
-            _loading = false;
-        }
+    private async Task GetAssets()
+    {
+        _loading = true;
+        var assets = await BaseDataService.GetAssetPages(_page);
+        _assets = assets.Items.ToArray();
+        _total = (int)assets.Total;
+        _loading = false;
     }
 }

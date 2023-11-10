@@ -34,7 +34,7 @@ namespace Mbill.Admin.Services.Impl
 
             var identity = new ClaimsIdentity(new[]
               {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.BId.ToString()),
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim("avatar", user.AvatarUrl),

@@ -1,41 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AntDesign;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Mbill.Admin.Components
+namespace Mbill.Admin.Components;
+
+public partial class SearchForm : AntDomComponentBase
 {
-    public partial class SearchForm : AntDomComponentBase
+    private readonly string _prefixCls = "ant-form";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnSearch { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnRest { get; set; }
+
+
+    private async Task HandleOnSearch(MouseEventArgs args)
     {
-        private readonly string _prefixCls = "ant-form";
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnSearch { get; set; }
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnRest { get; set; }
-
-
-        private async Task HandleOnSearch(MouseEventArgs args)
+        if (OnSearch.HasDelegate)
         {
-            if (OnSearch.HasDelegate)
-            {
-                await OnSearch.InvokeAsync(args);
-            }
+            await OnSearch.InvokeAsync(args);
         }
+    }
 
-        private async Task HandleOnRest(MouseEventArgs args)
+    private async Task HandleOnRest(MouseEventArgs args)
+    {
+        if (OnRest.HasDelegate)
         {
-            if (OnRest.HasDelegate)
-            {
-                await OnRest.InvokeAsync(args);
-            }
+            await OnRest.InvokeAsync(args);
         }
     }
 }

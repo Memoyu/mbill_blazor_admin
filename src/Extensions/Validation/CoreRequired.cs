@@ -1,23 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mbill.Admin.Extensions.Validation
+namespace Mbill.Admin.Extensions.Validation;
+
+public class CoreRequired : ValidationAttribute
 {
-    public class CoreRequired : ValidationAttribute
+    public CoreRequired()
     {
-        public CoreRequired()
-        {
-            ErrorMessage = "属性不能为空！";
-        }
-        public string Msg
-        {
-            get { return ErrorMessage; }
-            set { ErrorMessage = value; }
-        }
+        ErrorMessage = "属性不能为空！";
+    }
+    public string Msg
+    {
+        get { return ErrorMessage; }
+        set { ErrorMessage = value; }
+    }
 
-        public override bool IsValid(object value)
-        {
+    public override bool IsValid(object value)
+    {
 
-            return !(value == null);
-        }
+        return !(value == null);
     }
 }

@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Mbill.Admin.Models.BaseData.Output
+namespace Mbill.Admin.Models.BaseData.Output;
+
+public class CategoryModel
 {
-    public class CategoryModel
-    {
-        public long Id { get; set; }
+    public long BId { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public long ParentId { get; set; }
+    public long ParentBId { get; set; }
 
-        public string Type { get; set; }
+    public string Type { get; set; }
 
-        public decimal Budget { get; set; }
+    public decimal Budget { get; set; }
 
-        public string IconUrl { get; set; }
+    public string IconUrl { get; set; }
 
-        public string ParentName { get; set; }
+    public string ParentName { get; set; }
 
-        public string TypeName { get; set; }
+    public string TypeName { get; set; }
 
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime CreateTime { get; set; }
+    /// <summary>
+    /// 创建时间
+    /// </summary>
+    public DateTime CreateTime { get; set; }
 
-    }
 }

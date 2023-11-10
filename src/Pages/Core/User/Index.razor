@@ -34,8 +34,8 @@
                 <SearchFormItem Label="角色">
                     <Select DataSource="@_roleInfos"
                             AllowClear = "@true" 
-                            @bind-Value="@_page.RoleId"
-                            ValueName="@nameof(RoleModel.Id)"
+                            @bind-Value="@_page.RoleBId"
+                            ValueName="@nameof(RoleModel.BId)"
                             LabelName="@nameof(RoleModel.Name)"
                             Style="width:120px">
                     </Select>
@@ -62,7 +62,7 @@
                    @bind-PageIndex="_page.Page"
                    @bind-PageSize="_page.Size">
                 @*<Selection Key="@(context.Id.ToString())" />*@
-                <AntDesign.Column Title="ID" Width="80" Fixed="left" @bind-Field="@context.Id" Sortable />
+                <AntDesign.Column Title="ID" Width="80" Fixed="left" @bind-Field="@context.BId" Sortable />
                 <AntDesign.Column Title="昵称" Width="130" Fixed="left" @bind-Field="@context.Nickname" />
                 <AntDesign.Column Title="用户姓名" Width="130" Fixed="left" @bind-Field="@context.Username" />
                 <AntDesign.Column Title="性别" @bind-Field="@context.Gender" />
@@ -84,7 +84,7 @@
                         <SpaceItem><Button Type="primary" Ghost OnClick="()=>HandelOnEdit()">编辑</Button></SpaceItem>
                     </Space>
                     <Space>
-                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.Id)">删除</Button></SpaceItem>
+                        <SpaceItem><Button Danger OnClick="()=>HandelOnDelete(context.BId)">删除</Button></SpaceItem>
                     </Space>
                 </ActionColumn>
             </Table>

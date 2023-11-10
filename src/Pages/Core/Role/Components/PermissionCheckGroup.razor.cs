@@ -3,27 +3,26 @@ using AntDesign;
 using Mbill.Admin.Models.Core.Output;
 using Microsoft.AspNetCore.Components;
 
-namespace Mbill.Admin.Pages.Core.Role
+namespace Mbill.Admin.Pages.Core.Role;
+
+
+public partial class PermissionCheckGroup
 {
+    [Parameter] public PermissionCheckModel[] Checks { get; set; }
+    [Parameter] public string Title { get; set; }
 
-    public partial class PermissionCheckGroup
+    bool indeterminate => Checks.Count(o => o.Checked) > 0 && Checks.Count(o => o.Checked) < Checks.Count();
+
+    bool checkAll => Checks.All(o => o.Checked);
+
+    void CheckAllChanged()
     {
-        [Parameter] public PermissionCheckModel[] Checks { get; set; }
-        [Parameter] public string Title { get; set; }
+        bool allChecked = checkAll;
+        Checks.ForEach(o => o.Checked = !allChecked);
+    }
 
-        bool indeterminate => Checks.Count(o => o.Checked) > 0 && Checks.Count(o => o.Checked) < Checks.Count();
+    void OnChanged()
+    {
 
-        bool checkAll => Checks.All(o => o.Checked);
-
-        void CheckAllChanged()
-        {
-            bool allChecked = checkAll;
-            Checks.ForEach(o => o.Checked = !allChecked);
-        }
-
-        void OnChanged()
-        {
-
-        }
     }
 }

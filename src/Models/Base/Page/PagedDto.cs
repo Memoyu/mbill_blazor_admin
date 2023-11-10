@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 
-namespace Mbill.Admin.Models.Base.Page
-{
-    public class PagedDto<T>
-    {
-        public long Total { get; set; }
-        public IReadOnlyList<T> Items { get; set; }
-        public long Page { get; set; }
-        public long Size { get; set; }
+namespace Mbill.Admin.Models.Base.Page;
 
-        public PagedDto()
-        {
-        }
-        public PagedDto(IReadOnlyList<T> items)
-        {
-            Total = items.Count;
-            Items = items;
-        }
-        public PagedDto(IReadOnlyList<T> items, long total) : this(items)
-        {
-            Total = total;
-        }
+public class PagedDto<T>
+{
+    public long Total { get; set; }
+    public IReadOnlyList<T> Items { get; set; }
+    public long Page { get; set; }
+    public long Size { get; set; }
+
+    public PagedDto()
+    {
+    }
+    public PagedDto(IReadOnlyList<T> items)
+    {
+        Total = items.Count;
+        Items = items;
+    }
+    public PagedDto(IReadOnlyList<T> items, long total) : this(items)
+    {
+        Total = total;
     }
 }

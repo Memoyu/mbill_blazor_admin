@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Mbill.Admin.Models.Core.Input
+namespace Mbill.Admin.Models.Core.Input;
+
+public class DispatchPermissionsParams
 {
-    public class DispatchPermissionsParams
-    {
-        public long RoleId { get; set; }
+    public long RoleBId { get; set; }
 
-        public List<long> PermissionIds { get; set; }
-    }
+    public List<long> PermissionBIds { get; set; }
 }
