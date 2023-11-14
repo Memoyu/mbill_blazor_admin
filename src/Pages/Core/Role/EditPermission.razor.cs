@@ -12,7 +12,7 @@ namespace Mbill.Admin.Pages.Core.Role;
 
 public partial class EditPermission
 {
-    [Parameter] public long Id { get; set; }
+    [Parameter] public long BId { get; set; }
 
     private PermissionCardModel[] _permissionCards = { };
 
@@ -24,7 +24,7 @@ public partial class EditPermission
     protected override async Task OnInitializedAsync()
     {
         _permissionTrees = (await CoreService.GetPremisssionTrees()).ToArray();
-        var roleDetail = await CoreService.GetRoleDetail(Id);
+        var roleDetail = await CoreService.GetRoleDetail(BId);
         _permissionCards = _permissionTrees.Select(pt => new PermissionCardModel
         {
             Title = pt.Name,
@@ -50,7 +50,7 @@ public partial class EditPermission
 
         var model = new DispatchPermissionsParams
         {
-            RoleBId = Id,
+            RoleBId = BId,
             PermissionBIds = checkedPermissionIds
         };
 

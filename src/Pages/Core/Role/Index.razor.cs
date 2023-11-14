@@ -38,9 +38,9 @@ public partial class Index
     {
     }
 
-    private void HandelOnDelete(long id)
+    private void HandelOnDelete(long bId)
     {
-        _roles = _roles.Where(x => x.BId != id).ToArray();
+        _roles = _roles.Where(x => x.BId != bId).ToArray();
     }
 
     private void HandelOnEdit(RoleModel role)
@@ -48,9 +48,9 @@ public partial class Index
         _visible = true;
         _role = role;
     }
-    private void HandelOnEditPermission(long id)
+    private void HandelOnEditPermission(long bId)
     {
-        NavigationManager.NavigateTo($"/core/role/edit/{id}", true);
+        NavigationManager.NavigateTo($"/core/role/edit/{bId}", true);
     }
 
     private void HandelOnOk(MouseEventArgs e)
